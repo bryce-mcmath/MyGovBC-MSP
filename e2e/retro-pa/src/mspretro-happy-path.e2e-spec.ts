@@ -34,6 +34,11 @@ describe('MSP Retro PA - End to End Test (Happy Path)', () => {
         data.setSeed();
     });
 
+    afterEach(() => {
+        browser.executeScript('window.sessionStorage.clear();');
+        browser.executeScript('window.localStorage.clear();');
+    });
+
     it('Should navigate from Home page to Confirmation Page (end-to-end) when all required fields are filled out', () => {
         fillConsentModal(HOME_PAGE_URL);
         expect(browser.getCurrentUrl()).toContain(HOME_PAGE_URL, 'should navigate to the Home Page');
@@ -62,6 +67,7 @@ describe('MSP Retro PA - End to End Test (Happy Path)', () => {
         personalPage.continue();
         expect(browser.getCurrentUrl()).toContain(SPOUSE_PAGE_URL, 'should continue to the Spouse Info Page');
         spousePage.fillSpouseInfoPage();
+        browser.sleep(10000);
         expect(browser.getCurrentUrl()).toContain(CONTACT_PAGE_URL, 'should continue to the Contact Info Page');
         contactPage.fillContactInfoPage(contactData);
         expect(browser.getCurrentUrl()).toContain(REVIEW_PAGE_URL, 'should continue to the Review Page');
@@ -72,4 +78,3 @@ describe('MSP Retro PA - End to End Test (Happy Path)', () => {
     }, 120000);
 
 });
-

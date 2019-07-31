@@ -29,6 +29,7 @@ describe('MSP Retro PA - Spouse Info Page:', () => {
 
     // This page depends on the inputs from the home page
     it('01. should be able to add spouse, fill out the page and continue', () => {
+        browser.sleep(10000);
         spouseInfoPage.fillPage();
         spouseInfoPage.fillPersonalInfoPage(personalInfoData);
         spouseInfoPage.continue();

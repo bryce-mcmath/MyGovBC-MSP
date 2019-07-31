@@ -45,7 +45,6 @@ export class BaseMSPTestPage extends AbstractTestPage {
             const month = info.birthDate.getMonth();
             const year = info.birthDate.getFullYear();
             const day = info.birthDate.getDate();
-            console.log("DATE: ", info.birthDate);
             element.all(by.css(`select[ng-reflect-name*="month"] option`)).get(month).click();
             this.typeText('day', day.toString());
             this.typeText('year', year.toString());
