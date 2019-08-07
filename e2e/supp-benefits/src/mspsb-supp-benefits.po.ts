@@ -8,6 +8,18 @@ import { BaseMSPTestPage } from '../../msp.po';
  * can use the same e2e starting board.
  */
 
+export class EligibilityPage extends BaseMSPTestPage {
+
+    navigateTo() {
+        return browser.get('msp/benefit/eligibility');
+    }
+
+    fillPage() {
+        this.clickOption('true');
+        this.continue();
+    }
+}
+
 export class PreparePage extends BaseMSPTestPage {
 
     navigateTo() {
@@ -20,15 +32,16 @@ export class PreparePage extends BaseMSPTestPage {
         }
         this.clickOption('2018');
         this.typeNetIncome(amount);
-        this.clickRadioButton('Are you 65 or older this year?', 'false');
+        this.clickSBRadioButton('Are you 65 or older?', 'false');
         this.scrollDown();
-        this.clickRadioButton('Do you have a spouse or common', 'true');
-        this.clickRadioButton('Is your spouse/common-law part', 'false');
+        this.clickSBRadioButton('Do you have a spouse or common-law partner?', 'true');
+        this.clickSBRadioButton('Is your spouse 65 or older?', 'false');
         this.typeSpouseIncome(amount);
         this.scrollDown();
-        this.clickRadioButton('Do you have any children', 'false');
-        this.clickRadioButton('Did anyone included in your MS', 'false');
-        this.clickRadioButtonDuplicate('Did anyone included in your MS', 'false');
+        this.clickSBRadioButton('Do you have any children on your Medical Service Plan Account?', 'false');
+        this.clickSBRadioButton('Did anyone on your Medical Services Plan account claim a disability tax credit in', 'false');
+        this.clickSBRadioButton('Does anyone on your Medical Services Plan account have a Registered Disability Savings Plan?', 'false');
+        this.clickSBRadioButton('Did anyone on your Medical Services Plan account claim attendant or nursing home expenses in place of a disability in', 'false');
         this.continue();
     }
 

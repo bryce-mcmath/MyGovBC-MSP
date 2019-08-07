@@ -13,6 +13,10 @@ export class BaseMSPTestPage extends AbstractTestPage {
         element(by.css(`label[for^="${value}"]`)).click();
     }
 
+    clickSBRadioButton(legendVal: string, forVal: string){
+        element(by.cssContainingText('legend', `${legendVal}`)).element(by.xpath('..')).element(by.css(`label[for^=${forVal}]`)).click();
+    }
+
     clickRadioButton(labelVal: string, forVal: string){
         element(by.css(`common-radio[ng-reflect-label*="${labelVal}"]`)).element(by.css(`label[for*="${forVal}"]`)).click();
     }
@@ -45,9 +49,9 @@ export class BaseMSPTestPage extends AbstractTestPage {
             const month = info.birthDate.getMonth();
             const year = info.birthDate.getFullYear();
             const day = info.birthDate.getDate();
-            element.all(by.css(`select[ng-reflect-name*="month"] option`)).get(month).click();
-            this.typeText('day', day.toString());
-            this.typeText('year', year.toString());
+            element.all(by.css(`select[id*="month"] option`)).get(month).click();
+            this.typeDate('day', day.toString());
+            this.typeDate('year', year.toString());
         }
         this.scrollDown();
         this.typePHN(info.PHN.toString());
@@ -55,16 +59,25 @@ export class BaseMSPTestPage extends AbstractTestPage {
         //046454286
     }
 
-    typeName(ngVal: string, text: string) {
-        element(by.css(`common-name[ng-reflect-name*="${ngVal}"] input`)).sendKeys(text);
+    typeAddress(labelVal: string, text: string) {
+        element(by.cssContainingText('label', `${labelVal}`)).element(by.xpath('..')).element(by.css('input')).sendKeys(text);
     }
 
+    typeName(ngVal: string, text: string) {
+        element(by.css(`common-name[name^="${ngVal}"] input`)).sendKeys(text);
+    }
+
+    typeDate(idVal: string, text: string) {
+        element(by.css(`common-date input[id^="${idVal}"]`)).sendKeys(text);
+    }
+
+    /*
     typeStreet(idVal: string, text: string) {
-        element(by.css(`common-street[id="${idVal}"] input`)).sendKeys(text);
+        element(by.css(`common-street input[id*="${idVal}"]`)).sendKeys(text);
     }
 
     typeCity(text: string) {
-        element(by.css(`common-city[id^="city"] input`)).sendKeys(text);
+        element(by.css(`common-city input[id^="city"]`)).sendKeys(text);
     }
 
     typeProvince(text: string) {
@@ -80,6 +93,7 @@ export class BaseMSPTestPage extends AbstractTestPage {
     typePostalCode(text: string) {
         element(by.css(`common-postal-code[id^="postal"] input`)).sendKeys(text);
     }
+    */
 
     typePhoneNum(text: string) {
         element(by.css(`common-phone-number input`)).sendKeys(text);
@@ -97,9 +111,13 @@ export class BaseMSPTestPage extends AbstractTestPage {
         element(by.css('common-file-uploader input[type="file"]')).sendKeys(absolutePath); 
     }
 
+    uploadOneFileWithYear(year: string, absolutePath = '/space/workspace/MyGovBC-MSP/e2e/sample.jpg') {
+        element(by.css(`label[for="fileUploadBrowse-${year}"]`)).element(by.xpath('..')).element(by.css('input[type="file"]')).sendKeys(absolutePath); 
+    }
+
     uploadMultipleFiles(START_YEAR: number, END_YEAR: number, absolutePath = '/space/workspace/MyGovBC-MSP/e2e/sample.jpg') {
         for(var year = START_YEAR; year <= END_YEAR; year++){
-            element(by.css(`common-file-uploader[ng-reflect-id="${year}"] input[type="file"]`)).sendKeys(absolutePath);
+            element(by.css(`label[for="fileUploadBrowse-${year}"]`)).element(by.xpath('..')).element(by.css('input[type="file"]')).sendKeys(absolutePath); 
         }
     }
 

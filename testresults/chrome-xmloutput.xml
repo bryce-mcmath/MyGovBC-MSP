@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuites disabled="31" errors="0" failures="11" tests="42" time="185.524">
- <testsuite name="chrome.MSP Retro PA - Personal Info Page:" timestamp="2019-07-30T14:41:44" hostname="localhost" time="148.185" errors="0" tests="8" skipped="0" disabled="0" failures="10">
-  <testcase classname="chrome.MSP Retro PA - Personal Info Page:" name="01. should fill out the required fields and click continue" time="10.974" />
-  <testcase classname="chrome.MSP Retro PA - Personal Info Page:" name="02. should be able to upload multiple files (if multiple years were selected) and click continue" time="17.444">
-   <failure type="toContain" message="Expected &apos;http://localhost:4300/msp/assistance/personal-info&apos; to contain &apos;msp/assistance/spouse&apos;, &apos;should navigate to the next page&apos;."><![CDATA[Error: Failed expectation
-    at UserContext.<anonymous> (/space/workspace/MyGovBC-MSP/e2e/retro-pa/src/mspretro-personal-info.e2e-spec.ts:42:41)
+<testsuites disabled="40" errors="0" failures="6" tests="45" time="156.22">
+ <testsuite name="chrome.MSP Retro PA - End to End Test (Happy Path)" timestamp="2019-08-01T16:50:07" hostname="localhost" time="156.173" errors="0" tests="5" skipped="0" disabled="0" failures="6">
+  <testcase classname="chrome.MSP Retro PA - End to End Test (Happy Path)" name="01. User selects one tax year and has a spouse" time="45.886">
+   <failure type="toContain" message="Expected &apos;https://msp-supp-benefit-dev.pathfinder.gov.bc.ca/msp/assistance/contact&apos; to contain &apos;msp/assistance/confirmation&apos;, &apos;should be able to succesfully submit the form&apos;."><![CDATA[Error: Failed expectation
+    at UserContext.<anonymous> (/space/workspace/MyGovBC-MSP/e2e/retro-pa/src/mspretro-happy-path.e2e-spec.ts:60:41)
     at /space/workspace/MyGovBC-MSP/node_modules/jasminewd2/index.js:112:25
     at new ManagedPromise (/space/workspace/MyGovBC-MSP/node_modules/selenium-webdriver/lib/promise.js:1077:7)
     at ControlFlow.promise (/space/workspace/MyGovBC-MSP/node_modules/selenium-webdriver/lib/promise.js:2505:12)
@@ -15,40 +14,9 @@
     at /space/workspace/MyGovBC-MSP/node_modules/selenium-webdriver/lib/promise.js:668:7]]>
    </failure>
   </testcase>
-  <testcase classname="chrome.MSP Retro PA - Personal Info Page:" name="03. should NOT let user continue if there is at least one incomplete field" time="11.727" />
-  <testcase classname="chrome.MSP Retro PA - Personal Info Page:" name="04. should NOT allow name fields to have numbers and other characters (RPA #1) - EXPECT TO FAIL" time="11.748">
-   <failure type="toBe" message="Expected false to be true, &apos;expect the invalid first name error should be displayed&apos;."><![CDATA[Error: Failed expectation
-    at /space/workspace/MyGovBC-MSP/e2e/retro-pa/src/mspretro-personal-info.e2e-spec.ts:62:25
-    at ManagedPromise.invokeCallback_ (/space/workspace/MyGovBC-MSP/node_modules/selenium-webdriver/lib/promise.js:1376:14)
-    at TaskQueue.execute_ (/space/workspace/MyGovBC-MSP/node_modules/selenium-webdriver/lib/promise.js:3084:14)
-    at TaskQueue.executeNext_ (/space/workspace/MyGovBC-MSP/node_modules/selenium-webdriver/lib/promise.js:3067:27)
-    at asyncRun (/space/workspace/MyGovBC-MSP/node_modules/selenium-webdriver/lib/promise.js:2927:27)
-    at /space/workspace/MyGovBC-MSP/node_modules/selenium-webdriver/lib/promise.js:668:7
-    at <anonymous>
-    at process._tickCallback (internal/process/next_tick.js:188:7)]]>
-   </failure>
-   <failure type="toBe" message="Expected false to be true, &apos;expect the invalid middle name error should be displayed&apos;."><![CDATA[Error: Failed expectation
-    at /space/workspace/MyGovBC-MSP/e2e/retro-pa/src/mspretro-personal-info.e2e-spec.ts:65:25
-    at ManagedPromise.invokeCallback_ (/space/workspace/MyGovBC-MSP/node_modules/selenium-webdriver/lib/promise.js:1376:14)
-    at TaskQueue.execute_ (/space/workspace/MyGovBC-MSP/node_modules/selenium-webdriver/lib/promise.js:3084:14)
-    at TaskQueue.executeNext_ (/space/workspace/MyGovBC-MSP/node_modules/selenium-webdriver/lib/promise.js:3067:27)
-    at asyncRun (/space/workspace/MyGovBC-MSP/node_modules/selenium-webdriver/lib/promise.js:2927:27)
-    at /space/workspace/MyGovBC-MSP/node_modules/selenium-webdriver/lib/promise.js:668:7
-    at <anonymous>
-    at process._tickCallback (internal/process/next_tick.js:188:7)]]>
-   </failure>
-   <failure type="toBe" message="Expected false to be true, &apos;expect the invalid last name error should be displayed&apos;."><![CDATA[Error: Failed expectation
-    at /space/workspace/MyGovBC-MSP/e2e/retro-pa/src/mspretro-personal-info.e2e-spec.ts:68:25
-    at ManagedPromise.invokeCallback_ (/space/workspace/MyGovBC-MSP/node_modules/selenium-webdriver/lib/promise.js:1376:14)
-    at TaskQueue.execute_ (/space/workspace/MyGovBC-MSP/node_modules/selenium-webdriver/lib/promise.js:3084:14)
-    at TaskQueue.executeNext_ (/space/workspace/MyGovBC-MSP/node_modules/selenium-webdriver/lib/promise.js:3067:27)
-    at asyncRun (/space/workspace/MyGovBC-MSP/node_modules/selenium-webdriver/lib/promise.js:2927:27)
-    at /space/workspace/MyGovBC-MSP/node_modules/selenium-webdriver/lib/promise.js:668:7
-    at <anonymous>
-    at process._tickCallback (internal/process/next_tick.js:188:7)]]>
-   </failure>
-   <failure type="toContain" message="Expected &apos;http://localhost:4300/msp/assistance/spouse&apos; to contain &apos;msp/assistance/personal-info&apos;, &apos;should stay on the same page&apos;."><![CDATA[Error: Failed expectation
-    at UserContext.<anonymous> (/space/workspace/MyGovBC-MSP/e2e/retro-pa/src/mspretro-personal-info.e2e-spec.ts:70:41)
+  <testcase classname="chrome.MSP Retro PA - End to End Test (Happy Path)" name="02. User selects two tax years and has a spouse" time="31.355">
+   <failure type="toContain" message="Expected &apos;https://msp-supp-benefit-dev.pathfinder.gov.bc.ca/msp/assistance/contact&apos; to contain &apos;msp/assistance/confirmation&apos;, &apos;should be able to succesfully submit the form&apos;."><![CDATA[Error: Failed expectation
+    at UserContext.<anonymous> (/space/workspace/MyGovBC-MSP/e2e/retro-pa/src/mspretro-happy-path.e2e-spec.ts:84:41)
     at /space/workspace/MyGovBC-MSP/node_modules/jasminewd2/index.js:112:25
     at new ManagedPromise (/space/workspace/MyGovBC-MSP/node_modules/selenium-webdriver/lib/promise.js:1077:7)
     at ControlFlow.promise (/space/workspace/MyGovBC-MSP/node_modules/selenium-webdriver/lib/promise.js:2505:12)
@@ -59,45 +27,9 @@
     at /space/workspace/MyGovBC-MSP/node_modules/selenium-webdriver/lib/promise.js:668:7]]>
    </failure>
   </testcase>
-  <testcase classname="chrome.MSP Retro PA - Personal Info Page:" name="05. should NOT allow name to have unlimited characters (RPA #2) - EXPECT TO FAIL" time="14.65">
-   <failure type="toBe" message="Expected 100 to be 30, &apos;expected value of First Name input should be 30 (max length)&apos;."><![CDATA[Error: Failed expectation
-    at /space/workspace/MyGovBC-MSP/e2e/retro-pa/src/mspretro-personal-info.e2e-spec.ts:80:32
-    at elementArrayFinder_.then (/space/workspace/MyGovBC-MSP/node_modules/protractor/built/element.js:804:32)
-    at ManagedPromise.invokeCallback_ (/space/workspace/MyGovBC-MSP/node_modules/selenium-webdriver/lib/promise.js:1376:14)
-    at TaskQueue.execute_ (/space/workspace/MyGovBC-MSP/node_modules/selenium-webdriver/lib/promise.js:3084:14)
-    at TaskQueue.executeNext_ (/space/workspace/MyGovBC-MSP/node_modules/selenium-webdriver/lib/promise.js:3067:27)
-    at asyncRun (/space/workspace/MyGovBC-MSP/node_modules/selenium-webdriver/lib/promise.js:2927:27)
-    at /space/workspace/MyGovBC-MSP/node_modules/selenium-webdriver/lib/promise.js:668:7
-    at <anonymous>
-    at process._tickCallback (internal/process/next_tick.js:188:7)]]>
-   </failure>
-   <failure type="toBe" message="Expected 100 to be 30, &apos;expected value of Middle Name input should be 30 (max length)&apos;."><![CDATA[Error: Failed expectation
-    at /space/workspace/MyGovBC-MSP/e2e/retro-pa/src/mspretro-personal-info.e2e-spec.ts:83:32
-    at elementArrayFinder_.then (/space/workspace/MyGovBC-MSP/node_modules/protractor/built/element.js:804:32)
-    at ManagedPromise.invokeCallback_ (/space/workspace/MyGovBC-MSP/node_modules/selenium-webdriver/lib/promise.js:1376:14)
-    at TaskQueue.execute_ (/space/workspace/MyGovBC-MSP/node_modules/selenium-webdriver/lib/promise.js:3084:14)
-    at TaskQueue.executeNext_ (/space/workspace/MyGovBC-MSP/node_modules/selenium-webdriver/lib/promise.js:3067:27)
-    at asyncRun (/space/workspace/MyGovBC-MSP/node_modules/selenium-webdriver/lib/promise.js:2927:27)
-    at /space/workspace/MyGovBC-MSP/node_modules/selenium-webdriver/lib/promise.js:668:7
-    at <anonymous>
-    at process._tickCallback (internal/process/next_tick.js:188:7)]]>
-   </failure>
-   <failure type="toBe" message="Expected 100 to be 30, &apos;expected value of Last Name input should be 30 (max length)&apos;."><![CDATA[Error: Failed expectation
-    at /space/workspace/MyGovBC-MSP/e2e/retro-pa/src/mspretro-personal-info.e2e-spec.ts:86:32
-    at elementArrayFinder_.then (/space/workspace/MyGovBC-MSP/node_modules/protractor/built/element.js:804:32)
-    at ManagedPromise.invokeCallback_ (/space/workspace/MyGovBC-MSP/node_modules/selenium-webdriver/lib/promise.js:1376:14)
-    at TaskQueue.execute_ (/space/workspace/MyGovBC-MSP/node_modules/selenium-webdriver/lib/promise.js:3084:14)
-    at TaskQueue.executeNext_ (/space/workspace/MyGovBC-MSP/node_modules/selenium-webdriver/lib/promise.js:3067:27)
-    at asyncRun (/space/workspace/MyGovBC-MSP/node_modules/selenium-webdriver/lib/promise.js:2927:27)
-    at /space/workspace/MyGovBC-MSP/node_modules/selenium-webdriver/lib/promise.js:668:7
-    at <anonymous>
-    at process._tickCallback (internal/process/next_tick.js:188:7)]]>
-   </failure>
-  </testcase>
-  <testcase classname="chrome.MSP Retro PA - Personal Info Page:" name="06. should NOT allow invalid/unrealistic values for dates (RPA #3)" time="16.341" />
-  <testcase classname="chrome.MSP Retro PA - Personal Info Page:" name="06. should NOT allow futuristic values for dates (RPA #3)" time="17.409">
-   <failure type="toContain" message="Expected &apos;http://localhost:4300/msp/assistance/spouse&apos; to contain &apos;msp/assistance/personal-info&apos;, &apos;should stay on the same page&apos;."><![CDATA[Error: Failed expectation
-    at UserContext.<anonymous> (/space/workspace/MyGovBC-MSP/e2e/retro-pa/src/mspretro-personal-info.e2e-spec.ts:123:41)
+  <testcase classname="chrome.MSP Retro PA - End to End Test (Happy Path)" name="03. User selects multiple tax years and has a spouse" time="37.632">
+   <failure type="toContain" message="Expected &apos;https://msp-supp-benefit-dev.pathfinder.gov.bc.ca/msp/assistance/contact&apos; to contain &apos;msp/assistance/confirmation&apos;, &apos;should be able to succesfully submit the form&apos;."><![CDATA[Error: Failed expectation
+    at UserContext.<anonymous> (/space/workspace/MyGovBC-MSP/e2e/retro-pa/src/mspretro-happy-path.e2e-spec.ts:105:41)
     at /space/workspace/MyGovBC-MSP/node_modules/jasminewd2/index.js:112:25
     at new ManagedPromise (/space/workspace/MyGovBC-MSP/node_modules/selenium-webdriver/lib/promise.js:1077:7)
     at ControlFlow.promise (/space/workspace/MyGovBC-MSP/node_modules/selenium-webdriver/lib/promise.js:2505:12)
@@ -108,76 +40,113 @@
     at /space/workspace/MyGovBC-MSP/node_modules/selenium-webdriver/lib/promise.js:668:7]]>
    </failure>
   </testcase>
-  <testcase classname="chrome.MSP Retro PA - Personal Info Page:" name="08. should show Birth Date inline error when user does not fill out the Birth Date field correctly" time="10.585">
-   <failure type="toBe" message="Expected false to be true, &apos;expect the birth date inline error will display&apos;."><![CDATA[Error: Failed expectation
-    at /space/workspace/MyGovBC-MSP/e2e/retro-pa/src/mspretro-personal-info.e2e-spec.ts:131:25
+  <testcase classname="chrome.MSP Retro PA - End to End Test (Happy Path)" name="04. User has NO spouse" time="29.882">
+   <failure type="toContain" message="Expected &apos;https://msp-supp-benefit-dev.pathfinder.gov.bc.ca/msp/assistance/contact&apos; to contain &apos;msp/assistance/confirmation&apos;, &apos;should be able to succesfully submit the form&apos;."><![CDATA[Error: Failed expectation
+    at UserContext.<anonymous> (/space/workspace/MyGovBC-MSP/e2e/retro-pa/src/mspretro-happy-path.e2e-spec.ts:125:41)
+    at /space/workspace/MyGovBC-MSP/node_modules/jasminewd2/index.js:112:25
+    at new ManagedPromise (/space/workspace/MyGovBC-MSP/node_modules/selenium-webdriver/lib/promise.js:1077:7)
+    at ControlFlow.promise (/space/workspace/MyGovBC-MSP/node_modules/selenium-webdriver/lib/promise.js:2505:12)
+    at schedulerExecute (/space/workspace/MyGovBC-MSP/node_modules/jasminewd2/index.js:95:18)
+    at TaskQueue.execute_ (/space/workspace/MyGovBC-MSP/node_modules/selenium-webdriver/lib/promise.js:3084:14)
+    at TaskQueue.executeNext_ (/space/workspace/MyGovBC-MSP/node_modules/selenium-webdriver/lib/promise.js:3067:27)
+    at asyncRun (/space/workspace/MyGovBC-MSP/node_modules/selenium-webdriver/lib/promise.js:2974:25)
+    at /space/workspace/MyGovBC-MSP/node_modules/selenium-webdriver/lib/promise.js:668:7]]>
+   </failure>
+  </testcase>
+  <testcase classname="chrome.MSP Retro PA - End to End Test (Happy Path)" name="05. User selects two tax years and spouse checks and unchecks the second year" time="11.413">
+   <failure type="toContain" message="Expected &apos;https://msp-supp-benefit-dev.pathfinder.gov.bc.ca/msp/assistance/spouse&apos; to contain &apos;msp/assistance/contact&apos;, &apos;should continue to the Contact Info Page&apos;."><![CDATA[Error: Failed expectation
+    at UserContext.<anonymous> (/space/workspace/MyGovBC-MSP/e2e/retro-pa/src/mspretro-happy-path.e2e-spec.ts:146:41)
+    at /space/workspace/MyGovBC-MSP/node_modules/jasminewd2/index.js:112:25
+    at new ManagedPromise (/space/workspace/MyGovBC-MSP/node_modules/selenium-webdriver/lib/promise.js:1077:7)
+    at ControlFlow.promise (/space/workspace/MyGovBC-MSP/node_modules/selenium-webdriver/lib/promise.js:2505:12)
+    at schedulerExecute (/space/workspace/MyGovBC-MSP/node_modules/jasminewd2/index.js:95:18)
+    at TaskQueue.execute_ (/space/workspace/MyGovBC-MSP/node_modules/selenium-webdriver/lib/promise.js:3084:14)
+    at TaskQueue.executeNext_ (/space/workspace/MyGovBC-MSP/node_modules/selenium-webdriver/lib/promise.js:3067:27)
+    at asyncRun (/space/workspace/MyGovBC-MSP/node_modules/selenium-webdriver/lib/promise.js:2974:25)
+    at /space/workspace/MyGovBC-MSP/node_modules/selenium-webdriver/lib/promise.js:668:7]]>
+   </failure>
+   <failure type="exception" message="Failed: No element found using locator: by.cssContainingText(&quot;label&quot;, &quot;Full street address&quot;)"><![CDATA[NoSuchElementError: No element found using locator: by.cssContainingText("label", "Full street address")
+    at elementArrayFinder.getWebElements.then (/space/workspace/MyGovBC-MSP/node_modules/protractor/built/element.js:814:27)
     at ManagedPromise.invokeCallback_ (/space/workspace/MyGovBC-MSP/node_modules/selenium-webdriver/lib/promise.js:1376:14)
     at TaskQueue.execute_ (/space/workspace/MyGovBC-MSP/node_modules/selenium-webdriver/lib/promise.js:3084:14)
     at TaskQueue.executeNext_ (/space/workspace/MyGovBC-MSP/node_modules/selenium-webdriver/lib/promise.js:3067:27)
     at asyncRun (/space/workspace/MyGovBC-MSP/node_modules/selenium-webdriver/lib/promise.js:2927:27)
     at /space/workspace/MyGovBC-MSP/node_modules/selenium-webdriver/lib/promise.js:668:7
     at <anonymous>
-    at process._tickCallback (internal/process/next_tick.js:188:7)]]>
+    at process._tickCallback (internal/process/next_tick.js:188:7)Error
+    at ElementArrayFinder.applyAction_ (/space/workspace/MyGovBC-MSP/node_modules/protractor/built/element.js:459:27)
+    at ElementArrayFinder.(anonymous function).args [as sendKeys] (/space/workspace/MyGovBC-MSP/node_modules/protractor/built/element.js:91:29)
+    at ElementFinder.(anonymous function).args [as sendKeys] (/space/workspace/MyGovBC-MSP/node_modules/protractor/built/element.js:831:22)
+    at ContactInfoPage.BaseMSPTestPage.typeAddress (/space/workspace/MyGovBC-MSP/e2e/msp.po.ts:63:112)
+    at ContactInfoPage.fillContactInfoPage (/space/workspace/MyGovBC-MSP/e2e/retro-pa/src/mspretro-pa.po.ts:80:14)
+    at UserContext.<anonymous> (/space/workspace/MyGovBC-MSP/e2e/retro-pa/src/mspretro-happy-path.e2e-spec.ts:147:21)
+    at /space/workspace/MyGovBC-MSP/node_modules/jasminewd2/index.js:112:25
+    at new ManagedPromise (/space/workspace/MyGovBC-MSP/node_modules/selenium-webdriver/lib/promise.js:1077:7)
+    at ControlFlow.promise (/space/workspace/MyGovBC-MSP/node_modules/selenium-webdriver/lib/promise.js:2505:12)
+    at schedulerExecute (/space/workspace/MyGovBC-MSP/node_modules/jasminewd2/index.js:95:18)
+From: Task: Run it("05. User selects two tax years and spouse checks and unchecks the second year") in control flow
+    at UserContext.<anonymous> (/space/workspace/MyGovBC-MSP/node_modules/jasminewd2/index.js:94:19)
+    at attempt (/space/workspace/MyGovBC-MSP/node_modules/jasmine/node_modules/jasmine-core/lib/jasmine-core/jasmine.js:4297:26)
+    at QueueRunner.run (/space/workspace/MyGovBC-MSP/node_modules/jasmine/node_modules/jasmine-core/lib/jasmine-core/jasmine.js:4217:20)
+    at runNext (/space/workspace/MyGovBC-MSP/node_modules/jasmine/node_modules/jasmine-core/lib/jasmine-core/jasmine.js:4257:20)
+    at /space/workspace/MyGovBC-MSP/node_modules/jasmine/node_modules/jasmine-core/lib/jasmine-core/jasmine.js:4264:13
+    at /space/workspace/MyGovBC-MSP/node_modules/jasmine/node_modules/jasmine-core/lib/jasmine-core/jasmine.js:4172:9
+    at /space/workspace/MyGovBC-MSP/node_modules/jasminewd2/index.js:64:48
+    at ControlFlow.emit (/space/workspace/MyGovBC-MSP/node_modules/selenium-webdriver/lib/events.js:62:21)
+    at ControlFlow.shutdown_ (/space/workspace/MyGovBC-MSP/node_modules/selenium-webdriver/lib/promise.js:2674:10)
+    at shutdownTask_.MicroTask (/space/workspace/MyGovBC-MSP/node_modules/selenium-webdriver/lib/promise.js:2599:53)
+From asynchronous test: 
+Error
+    at Suite.<anonymous> (/space/workspace/MyGovBC-MSP/e2e/retro-pa/src/mspretro-happy-path.e2e-spec.ts:128:5)
+    at addSpecsToSuite (/space/workspace/MyGovBC-MSP/node_modules/jasmine/node_modules/jasmine-core/lib/jasmine-core/jasmine.js:1107:25)
+    at Env.fdescribe (/space/workspace/MyGovBC-MSP/node_modules/jasmine/node_modules/jasmine-core/lib/jasmine-core/jasmine.js:1095:7)
+    at fdescribe (/space/workspace/MyGovBC-MSP/node_modules/jasmine/node_modules/jasmine-core/lib/jasmine-core/jasmine.js:4428:18)
+    at Object.<anonymous> (/space/workspace/MyGovBC-MSP/e2e/retro-pa/src/mspretro-happy-path.e2e-spec.ts:6:1)
+    at Module._compile (module.js:643:30)
+    at Module.m._compile (/space/workspace/MyGovBC-MSP/node_modules/ts-node/src/index.ts:439:23)
+    at Module._extensions..js (module.js:654:10)
+    at Object.require.extensions.(anonymous function) [as .ts] (/space/workspace/MyGovBC-MSP/node_modules/ts-node/src/index.ts:442:12)]]>
    </failure>
   </testcase>
  </testsuite>
- <testsuite name="chrome.MSP Retro PA - Personal Info Page:.Generic Suite for All Pages" timestamp="2019-07-30T14:41:44" hostname="localhost" time="11.861" errors="0" tests="1" skipped="0" disabled="0" failures="0">
-  <testcase classname="chrome.MSP Retro PA - Personal Info Page:.Generic Suite for All Pages" name="GENERIC TEST 01. should load the page without issue" time="11.859" />
- </testsuite>
- <testsuite name="chrome.MSP Retro PA - Personal Info Page:.Generic Suite for Subsequent Page" timestamp="2019-07-30T14:41:56" hostname="localhost" time="25.442" errors="0" tests="2" skipped="0" disabled="0" failures="1">
-  <testcase classname="chrome.MSP Retro PA - Personal Info Page:.Generic Suite for Subsequent Page" name="GENERIC TEST 02. should let user to go back to the previous page by clicking the stepper" time="12.999" />
-  <testcase classname="chrome.MSP Retro PA - Personal Info Page:.Generic Suite for Subsequent Page" name="GENERIC TEST 03. should NOT let user continue by clicking the stepper" time="12.442">
-   <failure type="toContain" message="Expected &apos;http://localhost:4300/msp/assistance/spouse&apos; to contain &apos;msp/assistance/personal-info&apos;, &apos;should still be on the same page&apos;."><![CDATA[Error: Failed expectation
-    at UserContext.<anonymous> (/space/workspace/MyGovBC-MSP/e2e/msp-generic-tests.ts:84:45)
-    at /space/workspace/MyGovBC-MSP/node_modules/jasminewd2/index.js:112:25
-    at new ManagedPromise (/space/workspace/MyGovBC-MSP/node_modules/selenium-webdriver/lib/promise.js:1077:7)
-    at ControlFlow.promise (/space/workspace/MyGovBC-MSP/node_modules/selenium-webdriver/lib/promise.js:2505:12)
-    at schedulerExecute (/space/workspace/MyGovBC-MSP/node_modules/jasminewd2/index.js:95:18)
-    at TaskQueue.execute_ (/space/workspace/MyGovBC-MSP/node_modules/selenium-webdriver/lib/promise.js:3084:14)
-    at TaskQueue.executeNext_ (/space/workspace/MyGovBC-MSP/node_modules/selenium-webdriver/lib/promise.js:3067:27)
-    at asyncRun (/space/workspace/MyGovBC-MSP/node_modules/selenium-webdriver/lib/promise.js:2974:25)
-    at /space/workspace/MyGovBC-MSP/node_modules/selenium-webdriver/lib/promise.js:668:7]]>
-   </failure>
-  </testcase>
- </testsuite>
- <testsuite name="chrome.MSP Retro PA - Authorize Page:" timestamp="2019-07-30T14:44:12" hostname="localhost" time="0.005" errors="0" tests="2" skipped="0" disabled="2" failures="0">
-  <testcase classname="chrome.MSP Retro PA - Authorize Page:" name="01. should let user to continue when they select authorize by applicant" time="0.002">
+ <testsuite name="chrome.MSP Retro PA - Authorize Page:" timestamp="2019-08-01T16:52:44" hostname="localhost" time="0.005" errors="0" tests="2" skipped="0" disabled="2" failures="0">
+  <testcase classname="chrome.MSP Retro PA - Authorize Page:" name="01. should let user to continue when they select authorize by applicant" time="0.001">
    <skipped />
   </testcase>
   <testcase classname="chrome.MSP Retro PA - Authorize Page:" name="02. should let user to continue when they select authorize by attorney" time="0">
    <skipped />
   </testcase>
  </testsuite>
- <testsuite name="chrome.MSP Retro PA - Authorize Page:.Generic Suite for All Pages" timestamp="2019-07-30T14:44:12" hostname="localhost" time="0.001" errors="0" tests="1" skipped="0" disabled="1" failures="0">
-  <testcase classname="chrome.MSP Retro PA - Authorize Page:.Generic Suite for All Pages" name="GENERIC TEST 01. should load the page without issue" time="0.001">
+ <testsuite name="chrome.MSP Retro PA - Authorize Page:.Generic Suite for All Pages" timestamp="2019-08-01T16:52:44" hostname="localhost" time="0.001" errors="0" tests="1" skipped="0" disabled="1" failures="0">
+  <testcase classname="chrome.MSP Retro PA - Authorize Page:.Generic Suite for All Pages" name="GENERIC TEST 01. should load the page without issue" time="0">
    <skipped />
   </testcase>
  </testsuite>
- <testsuite name="chrome.MSP Retro PA - Authorize Page:.Generic Suite for Last Page" timestamp="2019-07-30T14:44:12" hostname="localhost" time="0.001" errors="0" tests="2" skipped="0" disabled="2" failures="0">
-  <testcase classname="chrome.MSP Retro PA - Authorize Page:.Generic Suite for Last Page" name="GENERIC TEST 02. should let user to go back to the previous page by clicking the stepper" time="0">
+ <testsuite name="chrome.MSP Retro PA - Authorize Page:.Generic Suite for Last Page" timestamp="2019-08-01T16:52:44" hostname="localhost" time="0.003" errors="0" tests="2" skipped="0" disabled="2" failures="0">
+  <testcase classname="chrome.MSP Retro PA - Authorize Page:.Generic Suite for Last Page" name="GENERIC TEST 02. should let user to go back to the previous page by clicking the stepper" time="0.001">
    <skipped />
   </testcase>
-  <testcase classname="chrome.MSP Retro PA - Authorize Page:.Generic Suite for Last Page" name="GENERIC TEST 03. should NOT let user to continue if they did not filled out required fields" time="0">
-   <skipped />
-  </testcase>
- </testsuite>
- <testsuite name="chrome.MSP Retro PA - Contact Info Page:" timestamp="2019-07-30T14:44:12" hostname="localhost" time="0.008" errors="0" tests="3" skipped="0" disabled="3" failures="0">
-  <testcase classname="chrome.MSP Retro PA - Contact Info Page:" name="01. should be able to continue when all required fields are filled up" time="0">
-   <skipped />
-  </testcase>
-  <testcase classname="chrome.MSP Retro PA - Contact Info Page:" name="02. should capture invalid postal codes thru postal code validation if country is Canada" time="0.001">
-   <skipped />
-  </testcase>
-  <testcase classname="chrome.MSP Retro PA - Contact Info Page:" name="03. should allow non-Canadian format for postal code validation if country is NOT Canada" time="0.002">
+  <testcase classname="chrome.MSP Retro PA - Authorize Page:.Generic Suite for Last Page" name="GENERIC TEST 03. should NOT let user to continue if they did not filled out required fields" time="0.002">
    <skipped />
   </testcase>
  </testsuite>
- <testsuite name="chrome.MSP Retro PA - Contact Info Page:.Generic Suite for All Pages" timestamp="2019-07-30T14:44:12" hostname="localhost" time="0.002" errors="0" tests="1" skipped="0" disabled="1" failures="0">
+ <testsuite name="chrome.MSP Retro PA - Contact Info Page:" timestamp="2019-08-01T16:52:44" hostname="localhost" time="0.008" errors="0" tests="3" skipped="0" disabled="3" failures="0">
+  <testcase classname="chrome.MSP Retro PA - Contact Info Page:" name="01. should be able to continue when all required fields are filled up" time="0.007">
+   <skipped />
+  </testcase>
+  <testcase classname="chrome.MSP Retro PA - Contact Info Page:" name="02. should capture invalid postal codes thru postal code validation if country is Canada" time="0">
+   <skipped />
+  </testcase>
+  <testcase classname="chrome.MSP Retro PA - Contact Info Page:" name="03. should allow non-Canadian format for postal code validation if country is NOT Canada" time="0">
+   <skipped />
+  </testcase>
+ </testsuite>
+ <testsuite name="chrome.MSP Retro PA - Contact Info Page:.Generic Suite for All Pages" timestamp="2019-08-01T16:52:44" hostname="localhost" time="0" errors="0" tests="1" skipped="0" disabled="1" failures="0">
   <testcase classname="chrome.MSP Retro PA - Contact Info Page:.Generic Suite for All Pages" name="GENERIC TEST 01. should load the page without issue" time="0">
    <skipped />
   </testcase>
  </testsuite>
- <testsuite name="chrome.MSP Retro PA - Contact Info Page:.Generic Suite for Subsequent Page" timestamp="2019-07-30T14:44:12" hostname="localhost" time="0" errors="0" tests="2" skipped="0" disabled="2" failures="0">
+ <testsuite name="chrome.MSP Retro PA - Contact Info Page:.Generic Suite for Subsequent Page" timestamp="2019-08-01T16:52:44" hostname="localhost" time="0.001" errors="0" tests="2" skipped="0" disabled="2" failures="0">
   <testcase classname="chrome.MSP Retro PA - Contact Info Page:.Generic Suite for Subsequent Page" name="GENERIC TEST 02. should let user to go back to the previous page by clicking the stepper" time="0">
    <skipped />
   </testcase>
@@ -185,15 +154,7 @@
    <skipped />
   </testcase>
  </testsuite>
- <testsuite name="chrome.MSP Retro PA - End to End Test (Happy Path)" timestamp="2019-07-30T14:44:12" hostname="localhost" time="0" errors="0" tests="2" skipped="0" disabled="2" failures="0">
-  <testcase classname="chrome.MSP Retro PA - End to End Test (Happy Path)" name="Should navigate from Home page to Confirmation Page (end-to-end) when all required fields are filled out" time="0">
-   <skipped />
-  </testcase>
-  <testcase classname="chrome.MSP Retro PA - End to End Test (Happy Path)" name="should be able to successfully pass test for maximum length for each field" time="0">
-   <skipped />
-  </testcase>
- </testsuite>
- <testsuite name="chrome.MSP Retro PA - Home Page:" timestamp="2019-07-30T14:44:12" hostname="localhost" time="0.007" errors="0" tests="3" skipped="0" disabled="3" failures="0">
+ <testsuite name="chrome.MSP Retro PA - Home Page:" timestamp="2019-08-01T16:52:44" hostname="localhost" time="0.005" errors="0" tests="3" skipped="0" disabled="3" failures="0">
   <testcase classname="chrome.MSP Retro PA - Home Page:" name="01. should let user to continue once they selected a year" time="0">
    <skipped />
   </testcase>
@@ -204,12 +165,12 @@
    <skipped />
   </testcase>
  </testsuite>
- <testsuite name="chrome.MSP Retro PA - Home Page:.Generic Suite for All Pages" timestamp="2019-07-30T14:44:12" hostname="localhost" time="0.001" errors="0" tests="1" skipped="0" disabled="1" failures="0">
+ <testsuite name="chrome.MSP Retro PA - Home Page:.Generic Suite for All Pages" timestamp="2019-08-01T16:52:44" hostname="localhost" time="0.001" errors="0" tests="1" skipped="0" disabled="1" failures="0">
   <testcase classname="chrome.MSP Retro PA - Home Page:.Generic Suite for All Pages" name="GENERIC TEST 01. should load the page without issue" time="0.001">
    <skipped />
   </testcase>
  </testsuite>
- <testsuite name="chrome.MSP Retro PA - Home Page:.Generic Suite for First Page" timestamp="2019-07-30T14:44:12" hostname="localhost" time="0.002" errors="0" tests="4" skipped="0" disabled="4" failures="0">
+ <testsuite name="chrome.MSP Retro PA - Home Page:.Generic Suite for First Page" timestamp="2019-08-01T16:52:44" hostname="localhost" time="0.004" errors="0" tests="4" skipped="0" disabled="4" failures="0">
   <testcase classname="chrome.MSP Retro PA - Home Page:.Generic Suite for First Page" name="GENERIC TEST 02. should NOT let the user to proceed if the user has not agreeed to the info collection notice" time="0">
    <skipped />
   </testcase>
@@ -219,45 +180,84 @@
   <testcase classname="chrome.MSP Retro PA - Home Page:.Generic Suite for First Page" name="GENERIC TEST 04. should NOT let user continue by clicking the stepper" time="0">
    <skipped />
   </testcase>
-  <testcase classname="chrome.MSP Retro PA - Home Page:.Generic Suite for First Page" name="GENERIC TEST 05. should NOT let user to continue if they did not filled out required fields" time="0.001">
+  <testcase classname="chrome.MSP Retro PA - Home Page:.Generic Suite for First Page" name="GENERIC TEST 05. should NOT let user to continue if they did not filled out required fields" time="0">
    <skipped />
   </testcase>
  </testsuite>
- <testsuite name="chrome.MSP Retro PA - Review Page:" timestamp="2019-07-30T14:44:12" hostname="localhost" time="0.003" errors="0" tests="1" skipped="0" disabled="1" failures="0">
+ <testsuite name="chrome.MSP Retro PA - Personal Info Page:" timestamp="2019-08-01T16:52:44" hostname="localhost" time="0.007" errors="0" tests="8" skipped="0" disabled="8" failures="0">
+  <testcase classname="chrome.MSP Retro PA - Personal Info Page:" name="01. should fill out the required fields and click continue" time="0.005">
+   <skipped />
+  </testcase>
+  <testcase classname="chrome.MSP Retro PA - Personal Info Page:" name="02. should be able to upload multiple files (if multiple years were selected) and click continue" time="0">
+   <skipped />
+  </testcase>
+  <testcase classname="chrome.MSP Retro PA - Personal Info Page:" name="03. should NOT let user continue if there is at least one incomplete field" time="0">
+   <skipped />
+  </testcase>
+  <testcase classname="chrome.MSP Retro PA - Personal Info Page:" name="04. should NOT allow name fields to have numbers and other characters (RPA #1) - EXPECT TO FAIL" time="0">
+   <skipped />
+  </testcase>
+  <testcase classname="chrome.MSP Retro PA - Personal Info Page:" name="05. should NOT allow name to have unlimited characters (RPA #2) - EXPECT TO FAIL" time="0">
+   <skipped />
+  </testcase>
+  <testcase classname="chrome.MSP Retro PA - Personal Info Page:" name="06. should NOT allow invalid/unrealistic values for dates (RPA #3)" time="0">
+   <skipped />
+  </testcase>
+  <testcase classname="chrome.MSP Retro PA - Personal Info Page:" name="06. should NOT allow futuristic values for dates (RPA #3)" time="0">
+   <skipped />
+  </testcase>
+  <testcase classname="chrome.MSP Retro PA - Personal Info Page:" name="08. should show Birth Date inline error when user does not fill out the Birth Date field correctly" time="0">
+   <skipped />
+  </testcase>
+ </testsuite>
+ <testsuite name="chrome.MSP Retro PA - Personal Info Page:.Generic Suite for All Pages" timestamp="2019-08-01T16:52:44" hostname="localhost" time="0.001" errors="0" tests="1" skipped="0" disabled="1" failures="0">
+  <testcase classname="chrome.MSP Retro PA - Personal Info Page:.Generic Suite for All Pages" name="GENERIC TEST 01. should load the page without issue" time="0.001">
+   <skipped />
+  </testcase>
+ </testsuite>
+ <testsuite name="chrome.MSP Retro PA - Personal Info Page:.Generic Suite for Subsequent Page" timestamp="2019-08-01T16:52:44" hostname="localhost" time="0" errors="0" tests="2" skipped="0" disabled="2" failures="0">
+  <testcase classname="chrome.MSP Retro PA - Personal Info Page:.Generic Suite for Subsequent Page" name="GENERIC TEST 02. should let user to go back to the previous page by clicking the stepper" time="0">
+   <skipped />
+  </testcase>
+  <testcase classname="chrome.MSP Retro PA - Personal Info Page:.Generic Suite for Subsequent Page" name="GENERIC TEST 03. should NOT let user continue by clicking the stepper" time="0">
+   <skipped />
+  </testcase>
+ </testsuite>
+ <testsuite name="chrome.MSP Retro PA - Review Page:" timestamp="2019-08-01T16:52:44" hostname="localhost" time="0.003" errors="0" tests="1" skipped="0" disabled="1" failures="0">
   <testcase classname="chrome.MSP Retro PA - Review Page:" name="01. should let the user to edit information" time="0">
    <skipped message="Temporarily disabled with xit" />
   </testcase>
  </testsuite>
- <testsuite name="chrome.MSP Retro PA - Review Page:.Generic Suite for All Pages" timestamp="2019-07-30T14:44:12" hostname="localhost" time="0.001" errors="0" tests="1" skipped="0" disabled="1" failures="0">
-  <testcase classname="chrome.MSP Retro PA - Review Page:.Generic Suite for All Pages" name="GENERIC TEST 01. should load the page without issue" time="0.001">
+ <testsuite name="chrome.MSP Retro PA - Review Page:.Generic Suite for All Pages" timestamp="2019-08-01T16:52:44" hostname="localhost" time="0.002" errors="0" tests="1" skipped="0" disabled="1" failures="0">
+  <testcase classname="chrome.MSP Retro PA - Review Page:.Generic Suite for All Pages" name="GENERIC TEST 01. should load the page without issue" time="0">
    <skipped />
   </testcase>
  </testsuite>
- <testsuite name="chrome.MSP Retro PA - Review Page:.Generic Suite for Subsequent Page" timestamp="2019-07-30T14:44:12" hostname="localhost" time="0.002" errors="0" tests="2" skipped="0" disabled="2" failures="0">
-  <testcase classname="chrome.MSP Retro PA - Review Page:.Generic Suite for Subsequent Page" name="GENERIC TEST 02. should let user to go back to the previous page by clicking the stepper" time="0">
+ <testsuite name="chrome.MSP Retro PA - Review Page:.Generic Suite for Subsequent Page" timestamp="2019-08-01T16:52:44" hostname="localhost" time="0.001" errors="0" tests="2" skipped="0" disabled="2" failures="0">
+  <testcase classname="chrome.MSP Retro PA - Review Page:.Generic Suite for Subsequent Page" name="GENERIC TEST 02. should let user to go back to the previous page by clicking the stepper" time="0.001">
    <skipped />
   </testcase>
   <testcase classname="chrome.MSP Retro PA - Review Page:.Generic Suite for Subsequent Page" name="GENERIC TEST 03. should NOT let user continue by clicking the stepper" time="0">
    <skipped />
   </testcase>
  </testsuite>
- <testsuite name="chrome.MSP Retro PA - Spouse Info Page:" timestamp="2019-07-30T14:44:12" hostname="localhost" time="0.003" errors="0" tests="3" skipped="0" disabled="3" failures="0">
-  <testcase classname="chrome.MSP Retro PA - Spouse Info Page:" name="01. should be able to add spouse, fill out the page and continue" time="0">
+ <testsuite name="chrome.MSP Retro PA - Spouse Info Page:" timestamp="2019-08-01T16:52:44" hostname="localhost" time="0.003" errors="0" tests="3" skipped="0" disabled="3" failures="0">
+  <testcase classname="chrome.MSP Retro PA - Spouse Info Page:" name="01. should be able to add spouse, fill out the page and continue" time="0.001">
    <skipped />
   </testcase>
   <testcase classname="chrome.MSP Retro PA - Spouse Info Page:" name="02. should NOT let user to continue if there is at least one incomplete field" time="0">
    <skipped />
   </testcase>
-  <testcase classname="chrome.MSP Retro PA - Spouse Info Page:" name="03. Add Spouse button should still be present but disabled when clicked - EXPECT TO FAIL" time="0.001">
+  <testcase classname="chrome.MSP Retro PA - Spouse Info Page:" name="03. Add Spouse button should still be present but disabled when clicked - EXPECT TO FAIL" time="0">
    <skipped />
   </testcase>
  </testsuite>
- <testsuite name="chrome.MSP Retro PA - Spouse Info Page:.Generic Suite for All Pages" timestamp="2019-07-30T14:44:12" hostname="localhost" time="0" errors="0" tests="1" skipped="0" disabled="1" failures="0">
+ <testsuite name="chrome.MSP Retro PA - Spouse Info Page:.Generic Suite for All Pages" timestamp="2019-08-01T16:52:44" hostname="localhost" time="0.001" errors="0" tests="1" skipped="0" disabled="1" failures="0">
   <testcase classname="chrome.MSP Retro PA - Spouse Info Page:.Generic Suite for All Pages" name="GENERIC TEST 01. should load the page without issue" time="0">
    <skipped />
   </testcase>
  </testsuite>
- <testsuite name="chrome.MSP Retro PA - Spouse Info Page:.Generic Suite for Subsequent Page" timestamp="2019-07-30T14:44:12" hostname="localhost" time="0" errors="0" tests="2" skipped="0" disabled="2" failures="0">
+ <testsuite name="chrome.MSP Retro PA - Spouse Info Page:.Generic Suite for Subsequent Page" timestamp="2019-08-01T16:52:44" hostname="localhost" time="0.001" errors="0" tests="2" skipped="0" disabled="2" failures="0">
   <testcase classname="chrome.MSP Retro PA - Spouse Info Page:.Generic Suite for Subsequent Page" name="GENERIC TEST 02. should let user to go back to the previous page by clicking the stepper" time="0">
    <skipped />
   </testcase>

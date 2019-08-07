@@ -77,11 +77,11 @@ export class SpouseInfoPage extends PersonalInfoPage {
 export class ContactInfoPage extends PersonalInfoPage {
 
     fillContactInfoPage(data: ContactInfoPageTest) {
-        this.typeStreet('addressLine1', data.streetAddress);
-        this.typeCity(data.streetAddress);
-        this.typeCountry('Canada');
-        this.typeProvince('British Columbia');
-        this.typePostalCode(data.postal);
+        this.typeAddress('Full street address', data.streetAddress);
+        this.typeAddress('City', data.streetAddress);
+        this.typeAddress('Country', 'Canada');
+        this.typeAddress('Province/State', 'British Columbia');
+        this.typeAddress('Postal Code', data.postal);
         this.typePhoneNum(data.mobile);
         this.continue();
     }
@@ -106,7 +106,6 @@ export class AuthorizePage extends BaseMSPTestPage {
             }
         });
         this.typeCaptcha();
-        this.continue();
     }
 
     checkConsent(labelVal: string) {

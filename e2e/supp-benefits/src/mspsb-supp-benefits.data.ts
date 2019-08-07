@@ -22,7 +22,7 @@ export class FakeDataSupplementaryBenefits {
             lastName: 'Loremipsumdolorsitametonsectet',
             birthDate: faker.date.past(),
             PHN: 9999999998,
-            SIN: 712234123
+            SIN: 464068626
         }
     }
 
