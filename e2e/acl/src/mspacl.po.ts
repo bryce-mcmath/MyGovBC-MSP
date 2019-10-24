@@ -16,7 +16,7 @@ export class RequestPage extends BaseMSPTestPage {
     navigateTo() {
       return browser.get('/msp/account-letter/request-acl');
     }
-
+    
     fillPage(data?: PersonalInfoPageTest) {
       if (data === undefined) {
           data = this.jsonData;
