@@ -1,8 +1,10 @@
 import * as faker from 'faker';
+import * as fs from 'fs';
 
 export class FakeDataACL {
 
     private static seedVal: number = Math.floor(Math.random() * Math.floor(1000));
+    public hasJsonData: boolean = false;
 
     personalInfo(): PersonalInfoPageTest {
         return {
@@ -18,6 +20,20 @@ export class FakeDataACL {
 
     setSeed(seed = this.getSeed()) {
         faker.seed(seed);
+    }
+
+    getJSONData() {
+        const x = process.argv;
+        const input = process.argv.filter(x => x.startsWith('--data'));
+        if (input.toString() !== '') {
+            const filename = input.toString().split('=')[1];
+            const data = fs.readFileSync(filename, 'utf8');
+            const jsonData = JSON.parse(data);
+            this.hasJsonData = true;
+            return jsonData;
+        } else {
+            return null;
+        }
     }
 }
 

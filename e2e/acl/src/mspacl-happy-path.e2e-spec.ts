@@ -17,7 +17,7 @@ describe('MSP ACL Page - End to End Test (Happy Path)', () => {
     });
 
     it('01. should successfully submit an application for MSP ACL', () => {
-        requestPage.fillPage(personalInfoData);
+        requestPage.fillPage();
         expect(browser.getCurrentUrl()).toContain(CONFIRMATION_PAGE_URL, 'should be able to succesfully submit the form');
     }, 120000);
 });

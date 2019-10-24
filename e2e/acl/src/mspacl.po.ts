@@ -1,5 +1,5 @@
 import { browser, by, element, protractor, Key } from 'protractor';
-import { PersonalInfoPageTest } from './mspacl.data';
+import { PersonalInfoPageTest, FakeDataACL } from './mspacl.data';
 import { BaseMSPTestPage } from '../../msp.po';
 /**
  * This class is for GENERAL functions, and all those that target components
@@ -10,17 +10,23 @@ import { BaseMSPTestPage } from '../../msp.po';
 
 export class RequestPage extends BaseMSPTestPage {
 
+    protected data = new FakeDataACL();
+    protected jsonData = this.data.getJSONData();
+
     navigateTo() {
       return browser.get('/msp/account-letter/request-acl');
     }
 
-    fillPage(data: PersonalInfoPageTest) {
+    fillPage(data?: PersonalInfoPageTest) {
+      if (data === undefined) {
+          data = this.jsonData;
+      }
       this.fillModal();
       this.typeText('phn', data.PHN.toString());
       this.selectDate('Birthdate', data);
       this.typeText('postal', data.postal);
       this.scrollDown();
-      this.clickRadioButton('EnrolmentMembership', 'S');
+      this.clickRadioButton('EnrolmentMembership', 'M');
       this.hasSpecificMember().then(val => {
         if(val){
           this.typePHNForSpecificMember('9982826354');
