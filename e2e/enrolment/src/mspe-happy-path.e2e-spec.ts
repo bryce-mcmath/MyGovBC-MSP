@@ -54,7 +54,7 @@ describe('MSP Enrolment Page - End to End Test (Happy Path)', () => {
         expect(browser.getCurrentUrl()).toContain(CONTACT_PAGE_URL, 'should continue to the Contact Info Page');
         contactPage.fillPage(contactData);
         expect(browser.getCurrentUrl()).toContain(REVIEW_PAGE_URL, 'should continue to the Review Page');
-        browser.sleep(1000);
+        browser.sleep(10000);
         reviewPage.clickContinue();
         expect(browser.getCurrentUrl()).toContain(AUTHORIZE_PAGE_URL, 'should contunue to the Authorization Page');
         authorizePage.fillPage();
@@ -72,29 +72,29 @@ describe('MSP Enrolment Page - End to End Test (Happy Path)', () => {
         expect(browser.getCurrentUrl()).toContain(CONTACT_PAGE_URL, 'should continue to the Contact Info Page');
         contactPage.fillPage(contactData);
         expect(browser.getCurrentUrl()).toContain(REVIEW_PAGE_URL, 'should continue to the Review Page');
-        browser.sleep(1000);
+        browser.sleep(10000);
         reviewPage.clickContinue();
         expect(browser.getCurrentUrl()).toContain(AUTHORIZE_PAGE_URL, 'should contunue to the Authorization Page');
         authorizePage.fillPage();
         expect(browser.getCurrentUrl()).toContain(CONFIRMATION_PAGE_URL, 'should be able to succesfully submit the form');
     }, 120000);
 
-    fit('03. should submit successfully if user has spouse', () => {
+    xit('03. should submit successfully if user has spouse and child', () => {
         eligibilityPage.fillPage();
         expect(browser.getCurrentUrl()).toContain(PERSONAL_PAGE_URL, 'should navigate to the Personal Info Page');
         personalPage.fillPage(personalInfoData);
         expect(browser.getCurrentUrl()).toContain(SPOUSE_PAGE_URL, 'should continue to the Spouse Info Page');
         spousePage.fillPage(personalInfoData);
         expect(browser.getCurrentUrl()).toContain(CHILD_PAGE_URL, 'should continue to the Child Info Page');
-        childPage.fillPage(personalInfoData);
+        childPage.continue();
         expect(browser.getCurrentUrl()).toContain(CONTACT_PAGE_URL, 'should continue to the Contact Info Page');
-        // contactPage.fillPage(contactData);
-        // expect(browser.getCurrentUrl()).toContain(REVIEW_PAGE_URL, 'should continue to the Review Page');
-        // browser.sleep(1000);
-        // reviewPage.clickContinue();
-        // expect(browser.getCurrentUrl()).toContain(AUTHORIZE_PAGE_URL, 'should contunue to the Authorization Page');
-        // authorizePage.fillPage();
-        // expect(browser.getCurrentUrl()).toContain(CONFIRMATION_PAGE_URL, 'should be able to succesfully submit the form');
+        contactPage.fillPage(contactData);
+        expect(browser.getCurrentUrl()).toContain(REVIEW_PAGE_URL, 'should continue to the Review Page');
+        browser.sleep(1000);
+        reviewPage.clickContinue();
+        expect(browser.getCurrentUrl()).toContain(AUTHORIZE_PAGE_URL, 'should contunue to the Authorization Page');
+        authorizePage.fillPage();
+        expect(browser.getCurrentUrl()).toContain(CONFIRMATION_PAGE_URL, 'should be able to succesfully submit the form');
     }, 120000);
 
 });

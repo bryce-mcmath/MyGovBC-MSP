@@ -18,9 +18,9 @@ export class FakeDataEnrolment {
             firstName: faker.name.firstName(),
             middleName: Math.random() > 0.5 ? faker.name.firstName() : undefined,
             lastName: faker.name.lastName(),
-            birthDate: faker.date.past(),
-            arrivalDateBC:  faker.date.past(),
-        }
+            birthDate: faker.date.between('1980-01-01', '1990-12-31'),
+            arrivalDateBC:  faker.date.past(10),
+        };
     }
 
     getSeed() {
