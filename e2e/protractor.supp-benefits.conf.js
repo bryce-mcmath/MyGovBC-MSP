@@ -14,7 +14,7 @@ exports.config = {
     'browserName': 'chrome'
   }],
   directConnect: true,
-  baseUrl: 'https://msp-supp-benefit-dev.pathfinder.gov.bc.ca/msp/',
+  baseUrl: 'http://localhost:4300/',
   framework: 'jasmine2',
   jasmineNodeOpts: {
     showColors: true,

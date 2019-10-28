@@ -12,7 +12,7 @@ export class RequestPage extends BaseMSPTestPage {
 
     protected data = new FakeDataACL();
     protected jsonData = this.data.getJSONData();
-
+  
     navigateTo() {
       return browser.get('/msp/account-letter/request-acl');
     }
@@ -23,7 +23,26 @@ export class RequestPage extends BaseMSPTestPage {
       }
       this.fillModal();
       this.typeText('phn', data.PHN.toString());
-      this.selectDate('Birthdate', data);
+      if (data === undefined) {
+        this.selectDate('Birthdate', data);
+      }
+      else {
+        this.typeDate('Birthdate', '3', '29', '2000');
+        // SimpleDateFormat jsonDate = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+        // SimpleDateFormat month = new SimpleDateFormat("MM", Locale.ENGLISH);
+        // SimpleDateFormat day = new SimpleDateFormat("dd", Locale.ENGLISH);
+        // SimpleDateFormat year = new SimpleDateFormat("yyyy", Locale.ENGLISH);
+        // Date date = null;
+        // try {
+        //     date = jsonDate.parse(data.birthDate);
+        //     String newMonth = month.format(date);
+        //     String newDay = day.format(date);
+        //     String newYear = year.format(date);
+        //     this.typeDate('Birthdate', newMonth, newDay, newYear);
+        // } catch (ParseException e) {
+        //     console.log(e)
+        // }
+      }
       this.typeText('postal', data.postal);
       this.scrollDown();
       this.clickRadioButton('EnrolmentMembership', 'M');
