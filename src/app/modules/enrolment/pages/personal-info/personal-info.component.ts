@@ -1,13 +1,12 @@
-import { Component, Injectable, ViewChild } from '@angular/core';
-import { MspDataService } from '../../../../services/msp-data.service';
+import { Component, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { ROUTES_ENROL } from '../../models/enrol-route-constants';
 import { PageStateService } from '../../../../services/page-state.service';
-import { StatusInCanada, CanadianStatusReason } from '../../../msp-core/models/canadian-status.enum';
 import { SupportDocuments } from '../../../msp-core/models/support-documents.model';
 import { nameChangeSupportDocuments } from '../../../msp-core/components/support-documents/support-documents.component';
 import { EnrolForm } from '../../models/enrol-form';
-import { MspPerson } from '../../../../components/msp/model/msp-person.model';
+import { EnrolDataService } from '../../services/enrol-data.service';
+import { Enrollee } from '../../models/enrollee';
 
 @Component({
   templateUrl: './personal-info.component.html'
@@ -18,16 +17,16 @@ export class PersonalInfoComponent extends EnrolForm {
   nameChangeDocList = nameChangeSupportDocuments();
 
   constructor( protected router: Router,
-               protected dataService: MspDataService,
+               protected enrolDataService: EnrolDataService,
                protected pageStateService: PageStateService ) {
-    super( dataService, pageStateService, router );
+    super( enrolDataService, pageStateService, router );
   }
 
-  get applicant(): MspPerson {
+  get applicant(): Enrollee {
     return this.mspApplication.applicant;
   }
 
-  set applicant( applicant: MspPerson ) {
+  set applicant( applicant: Enrollee ) {
     this.mspApplication.applicant = applicant;
   }
 
@@ -36,6 +35,7 @@ export class PersonalInfoComponent extends EnrolForm {
   }
 
   set statusDocuments( document: SupportDocuments ) {
+    console.log( 'statusDocuments: ', document );
 
     if ( document.images && document.images.length === 0 ) {
       // no status documents remove any name documents
@@ -44,6 +44,7 @@ export class PersonalInfoComponent extends EnrolForm {
     }
 
     this.applicant.documents = document;
+    console.log( 'statusDocuments: ', document );
   }
 
   get hasStatusDocuments(): boolean {
@@ -70,18 +71,13 @@ export class PersonalInfoComponent extends EnrolForm {
              ( this.applicant.hasNameChange && this.hasNameDocuments ))); // name change requires documentation
   }
 
-  get isTemporaryResident(): boolean  {
-    return this.applicant.status === StatusInCanada.TemporaryResident;
-  }
-
   get requestSchoolInfo() {
-    if ( this.applicant.status === StatusInCanada.CitizenAdult &&
-         this.applicant.currentActivity === CanadianStatusReason.LivingInBCWithoutMSP) {
+    if ( this.applicant.isCanadianResident && this.applicant.isLivingWithoutMSP) {
       return this.applicant.livedInBCSinceBirth !== undefined &&
              this.applicant.livedInBCSinceBirth !== null &&
              this.applicant.madePermanentMoveToBC;
     }
-    return this.applicant.madePermanentMoveToBC || this.isTemporaryResident;
+    return this.applicant.madePermanentMoveToBC || this.applicant.isTemporaryResident;
   }
 
   canContinue(): boolean {
@@ -89,7 +85,7 @@ export class PersonalInfoComponent extends EnrolForm {
     let valid = super.canContinue() && this.hasStatusDocuments;
 
     // If not temporary resident needs to have moved permenently to BC
-    if ( !this.isTemporaryResident ) {
+    if ( !this.applicant.isTemporaryResident ) {
       valid = valid && this.applicant.madePermanentMoveToBC;
     }
 

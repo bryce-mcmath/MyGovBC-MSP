@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { MspDataService } from '../../../../services/msp-data.service';
 import { environment } from '../../../../../environments/environment';
 import { ROUTES_ENROL } from '../../models/enrol-route-constants';
 import { PageStateService } from '../../../../services/page-state.service';
@@ -10,6 +9,7 @@ import { MspApiEnrolmentService } from '../../services/msp-api-enrolment.service
 import { ApiStatusCodes } from 'moh-common-lib';
 import { ApiResponse } from '../../../../models/api-response.interface';
 import { HttpErrorResponse } from '@angular/common/http';
+import { EnrolDataService } from '../../services/enrol-data.service';
 
 @Component({
   selector: 'msp-authorize',
@@ -20,12 +20,12 @@ export class AuthorizeComponent extends EnrolForm {
 
   captchaApiBaseUrl: string = environment.appConstants.captchaApiBaseUrl;
 
-  constructor( protected dataService: MspDataService,
+  constructor( protected enrolDataService: EnrolDataService,
                protected pageStateService: PageStateService,
                protected router: Router,
                private logService: MspLogService,
                private apiService: MspApiEnrolmentService ) {
-  super( dataService, pageStateService, router );
+  super( enrolDataService, pageStateService, router );
   }
 
   applicantAuthorizeOnChange(event: boolean) {
@@ -38,7 +38,7 @@ export class AuthorizeComponent extends EnrolForm {
   }
 
   get hasSpouse() {
-    return this.mspApplication.spouse ? true : false;
+    return this.mspApplication.hasSpouse();
   }
 
   get label() {
@@ -53,7 +53,7 @@ export class AuthorizeComponent extends EnrolForm {
   }
 
   canContinue(): boolean {
-    return super.canContinue() && this.mspApplication.hasValidAuthToken;
+    return super.canContinue() && !!this.mspApplication.authorizationToken;
   }
 
   // Override continue function
@@ -67,44 +67,44 @@ export class AuthorizeComponent extends EnrolForm {
     }
 
     // Set page complete
-    this.pageStateService.setPageComplete( this.router.url, this.mspApplication.pageStatus);
+    this.pageStateService.setPageComplete( this.router.url, this.enrolDataService.pageStatus );
 
     this.loading = true;
     this.logService.log({ name: 'Enrolment application submitting request' },
                         'Enrolment : Submission Request');
 
-    this.apiService.sendRequest( this.dataService.mspApplication )
+    this.apiService.sendRequest( this.mspApplication )
       .then((response: ApiResponse) => {
         this.loading = false;
 
         if (response instanceof HttpErrorResponse) {
           this.logService.log({
               name: 'Enrolment - System Error',
-              confirmationNumber: this.dataService.mspApplication.uuid,
+              confirmationNumber: this.mspApplication.uuid,
               url: this.router.url
           }, 'Enrolment - Submission Response Error' + response.message);
 
-          this.dataService.mspApplication.regenUUID();
-          this.dataService.mspApplication.authorizationToken = null;
-          this.dataService.saveMspApplication();
+          this.mspApplication.regenUUID();
+          this.mspApplication.authorizationToken = null;
+          this.enrolDataService.saveApplication();
           return;
         }
 
-        const refNumber = response.op_reference_number;
+        this.enrolDataService.application.referenceNumber = response.op_reference_number;
         const statusCode = (response.op_return_code === 'SUCCESS' ? ApiStatusCodes.SUCCESS : ApiStatusCodes.ERROR);
 
         this.logService.log({
           name: 'Enrolment - Received refNo ',
-          confirmationNumber: refNumber
+          confirmationNumber: this.enrolDataService.application.referenceNumber
         }, 'Enrolment - Submission Response Success');
 
         //delete the application from storage
-        this.dataService.removeMspApplication();
+        this.enrolDataService.removeApplication();
 
         //  go to confirmation
         this.router.navigate([ROUTES_ENROL.CONFIRMATION.fullpath],
                 { queryParams: {
-                    confirmationNum: refNumber,
+                    confirmationNum: this.enrolDataService.application.referenceNumber,
                     status: statusCode}
                 });
       })
@@ -122,9 +122,9 @@ export class AuthorizeComponent extends EnrolForm {
           request: error._requestBody
         }, 'Enrolment - Submission Response Error');
 
-        this.dataService.mspApplication.regenUUID();
-        this.dataService.mspApplication.authorizationToken = null;
-        this.dataService.saveMspApplication();
+        this.mspApplication.regenUUID();
+        this.mspApplication.authorizationToken = null;
+        this.enrolDataService.saveApplication();
 
         // Network error
         if ( error instanceof HttpErrorResponse ) {
@@ -138,6 +138,6 @@ export class AuthorizeComponent extends EnrolForm {
               message: message
             }
           });
-      });
+    });
   }
 }

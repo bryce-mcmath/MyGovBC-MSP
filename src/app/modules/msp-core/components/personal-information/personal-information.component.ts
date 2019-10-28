@@ -1,8 +1,19 @@
-import { Component, forwardRef, Input, Output, EventEmitter } from '@angular/core';
-import { Base, SimpleDate } from 'moh-common-lib';
+import { Component, forwardRef, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Base, ErrorMessage } from 'moh-common-lib';
 import { ControlContainer, NgForm } from '@angular/forms';
-import { MspPerson } from '../../../../components/msp/model/msp-person.model';
 import { Gender } from '../../../../models/gender.enum';
+import { Relationship } from '../../../../models/relationship.enum';
+import { subYears, startOfToday } from 'date-fns';
+
+export interface IPersonalInformation {
+  firstName: string;
+  middleName: string;
+  lastName: string;
+  dateOfBirth: Date;
+  gender: Gender;
+  relationship: Relationship;
+  phn?: string;
+}
 
 @Component({
   selector: 'msp-personal-information',
@@ -16,14 +27,12 @@ import { Gender } from '../../../../models/gender.enum';
     { provide: ControlContainer, useExisting: forwardRef(() => NgForm) }
   ]
 })
-export class PersonalInformationComponent extends Base {
+export class PersonalInformationComponent<T extends IPersonalInformation> extends Base implements OnInit {
 
   @Input() disabled: boolean = false;
-  @Input() showPhn: boolean = false;
 
-  // TODO: Change to PERSON when MspPerson is re-factored to extend Person in common lib
-  @Input() person: MspPerson;
-  @Output() personChange: EventEmitter<MspPerson> = new EventEmitter<MspPerson>();
+  @Input() person: T;
+  @Output() personChange: EventEmitter<T> = new EventEmitter<T>();
 
   dobError: boolean = false;
 
@@ -32,8 +41,31 @@ export class PersonalInformationComponent extends Base {
      {'label': 'Female', 'value': Gender.Female}
     ];
 
+  dobErrorMsg: ErrorMessage = null;
+  dobStartRange: Date = null;
+  dobEndRange: Date = null;
+
   constructor() {
     super();
+  }
+
+  ngOnInit() {
+    const today = startOfToday();
+
+    // Set up parmeters for dob ranges
+    if ( this.person.relationship === Relationship.Applicant ) {
+      this.dobErrorMsg = { invalidRange: 'An applicant must be 16 years or older.' };
+      this.dobEndRange = subYears( today, 16 );
+    } else if ( this.person.relationship === Relationship.Child19To24 ) {
+      this.dobErrorMsg = { invalidRange: 'A post-secondary student must be between 19 and 24 years.' };
+      this.dobStartRange = subYears( today, 24 );
+      this.dobEndRange = subYears( today, 19 );
+    } else if ( this.person.relationship === Relationship.ChildUnder19 ) {
+      this.dobErrorMsg = { invalidRange: 'A post-secondary student must be between 19 and 24 years.' };
+      this.dobEndRange = subYears( today, 19 );
+    } else {
+      this.dobEndRange = today;
+    }
   }
 
   get firstName() {
@@ -64,22 +96,20 @@ export class PersonalInformationComponent extends Base {
   }
 
   get phn() {
-    return this.person.previous_phn;
+    return this.person.phn;
   }
 
   set phn(phn: string) {
-    this.person.previous_phn = phn;
+    this.person.phn = phn;
     this.personChange.emit(this.person);
   }
 
   get dateOfBirth() {
-    return this.person.dobSimple;
+    return this.person.dateOfBirth;
   }
 
-  set dateOfBirth( dob: SimpleDate ) {
-    this.person.dobSimple = dob;
-
-
+  set dateOfBirth( dob: Date ) {
+    this.person.dateOfBirth = dob;
     this.personChange.emit(this.person);
   }
 
@@ -88,10 +118,7 @@ export class PersonalInformationComponent extends Base {
   }
 
   set gender( val: Gender ) {
-
     this.person.gender = val;
     this.personChange.emit(this.person);
   }
-
-
 }
