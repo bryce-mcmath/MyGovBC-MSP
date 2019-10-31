@@ -35,7 +35,6 @@ export class PersonalInfoComponent extends EnrolForm {
   }
 
   set statusDocuments( document: SupportDocuments ) {
-    console.log( 'statusDocuments: ', document );
 
     if ( document.images && document.images.length === 0 ) {
       // no status documents remove any name documents
@@ -44,7 +43,6 @@ export class PersonalInfoComponent extends EnrolForm {
     }
 
     this.applicant.documents = document;
-    console.log( 'statusDocuments: ', document );
   }
 
   get hasStatusDocuments(): boolean {
@@ -81,7 +79,6 @@ export class PersonalInfoComponent extends EnrolForm {
   }
 
   canContinue(): boolean {
-    console.log( 'form: ', this.form );
     let valid = super.canContinue() && this.hasStatusDocuments;
 
     // If not temporary resident needs to have moved permenently to BC

@@ -1,9 +1,9 @@
 // DO NOT DELETE OR APP WILL FAIL TO COMPILE! Generated from version.js
-export const gitCommit = 'eff1d21c';
-export const buildTime = '10/25/2019 at 8:28:57 PM';
+export const gitCommit = '893dfcc3';
+export const buildTime = '10/30/2019 at 10:38:12 AM';
 /** App version retrieved from package.json. */
-export const projectVersion = '2.11.0';
+export const projectVersion = '2.13.3';
 /** Human readable message  */
-export const message = 'Canonical Version: eff1d21c - 10/25/2019 at 8:28:57 PM (v2.11.0) \nhttps://github.com/bcgov/MyGovBC-MSP/commits/eff1d21c';
+export const message = 'Canonical Version: 893dfcc3 - 10/30/2019 at 10:38:12 AM (v2.13.3) \nhttps://github.com/bcgov/MyGovBC-MSP/commits/893dfcc3';
 /** If true, other values should be present. */
 export const success = true;

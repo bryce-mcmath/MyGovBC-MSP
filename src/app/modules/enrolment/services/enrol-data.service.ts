@@ -3,6 +3,7 @@ import { BaseMspDataService } from '../../../services/base-msp-data.service';
 import { LocalStorageService } from 'angular-2-local-storage';
 import { EnrolApplicationDto, EnrolApplication } from '../models/enrol-application';
 import { EnrolleeDto, Enrollee } from '../models/enrollee';
+import { PageStateService } from '../../../services/page-state.service';
 
 @Injectable({
   providedIn: 'root'
@@ -139,14 +140,10 @@ export class EnrolDataService extends BaseMspDataService {
     output.schoolCompletionDate = this.convertNumberToDate( dto.schoolCompletionDate );
     output.departureDateForSchool = this.convertNumberToDate( dto.departureDateForSchool );
 
-    console.log( 'fromEnrolleeTranferObject: ', output );
-
     return output;
   }
 
   private toEnrolleeTranferObject( input: Enrollee ): EnrolleeDto {
-
-  console.log( 'toEnrolleeTranferObject: input-', input );
 
     const dto: EnrolleeDto = this.toBasePersonTransferObject<EnrolleeDto>( input, EnrolleeDto );
 
@@ -192,8 +189,6 @@ export class EnrolDataService extends BaseMspDataService {
     dto.schoolAddress = this.toAddressTransferObject( input.schoolAddress );
     dto.schoolCompletionDate = this.convertDateToNumber( input.schoolCompletionDate );
     dto.departureDateForSchool = this.convertDateToNumber( input.departureDateForSchool );
-
-    console.log( 'toEnrolleeTranferObject: ', dto );
 
     return dto;
   }
