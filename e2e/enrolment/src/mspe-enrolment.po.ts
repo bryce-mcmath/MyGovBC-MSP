@@ -1,6 +1,6 @@
 import { browser, by, element, WebElement, protractor, Key } from 'protractor';
 import { AbstractTestPage } from 'moh-common-lib/e2e';
-import { ContactPageTest, PersonalInfoPageTest } from './mspe-enrolment.data';
+import { ContactPageTest, PersonalInfoPageTest, ChildInfoPageTest } from './mspe-enrolment.data';
 /**
  * This class is for GENERAL functions, and all those that target components
  * from the moh-common-lib.  The long-term plan will be to move these over to
@@ -230,7 +230,7 @@ export class ChildInfoPage extends PersonalInfoPage {
         super();
     }
 
-    fillPage(data: PersonalInfoPageTest) {
+    fillPage(data: ChildInfoPageTest) {
         this.clickAddChild();
         this.clickRadioButtonByID('AgeCategory', '2');
         this.clickOption("Child's immigration status in Canada", 'Canadian citizen');
@@ -238,6 +238,28 @@ export class ChildInfoPage extends PersonalInfoPage {
         browser.sleep(1000);
         this.clickRadioButtonByID('statausReason', '1');
         this.scrollDown();
+        this.clickOption('Document Type', 'Canadian birth certificate');
+        this.scrollDown();
+        this.uploadFile();
+        browser.sleep(1000);
+        this.clickRadioButtonByLabel('Has your child\'s name changed since their ID was issued?', 'false');
+        this.typeName('First name', data.firstName);
+        this.scrollDown();
+        if(data.middleName){
+            this.typeName('Middle name (optional)', data.middleName);
+        }
+        this.typeName('Last name', data.lastName);
+        this.selectDate('Birthdate', data);
+        this.clickRadioButtonByLabel('Gender', 'M');
+        this.scrollDown();
+        // this.clickRadioButtonByLegend('Have you moved to B.C. permanently?', 'true');
+        // this.typeText('province', 'Alberta');
+        // this.selectDate('Arrival date in B.C.', data);
+        // this.clickRadioButtonByLegend('Have you been outside B.C. for', 'false');
+        // this.clickRadioButtonByLegend('Do you have a previous B.C.', 'false');
+        // this.clickRadioButtonByLegend('Have you been released from', 'false');
+        // this.clickRadioButtonByLegend('Are you full-time student', 'false');
+        // this.clickContinue();
         browser.sleep(5000);
     }
 

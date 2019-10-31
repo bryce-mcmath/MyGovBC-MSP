@@ -1,5 +1,5 @@
 import { browser, by, element, protractor, Key } from 'protractor';
-import { PersonalInfoPageTest, FakeDataACL } from './mspacl.data';
+import { PersonalInfoPageTest, FakeDataACL, getJSONData } from './mspacl.data';
 import { BaseMSPTestPage } from '../../msp.po';
 /**
  * This class is for GENERAL functions, and all those that target components
@@ -10,23 +10,28 @@ import { BaseMSPTestPage } from '../../msp.po';
 
 export class RequestPage extends BaseMSPTestPage {
 
-    protected data = new FakeDataACL();
-    protected jsonData = this.data.getJSONData();
+    protected data: PersonalInfoPageTest = new FakeDataACL();
+    protected jsonData = getJSONData();
   
     navigateTo() {
       return browser.get('/msp/account-letter/request-acl');
     }
     
-    fillPage(data?: PersonalInfoPageTest) {
-      if (data === undefined) {
-          data = this.jsonData;
+    fillPage(data = this.data) {
+      if (this.jsonData){
+        data = this.jsonData;
       }
+
       this.fillModal();
       this.typeText('phn', data.PHN.toString());
+
+      // todo tidy up - undefined would never happen
       if (data === undefined) {
         this.selectDate('Birthdate', data);
       }
       else {
+        // note - use String.prototype.split('-') to separate date values.
+
         this.typeDate('Birthdate', '3', '29', '2000');
         // SimpleDateFormat jsonDate = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
         // SimpleDateFormat month = new SimpleDateFormat("MM", Locale.ENGLISH);

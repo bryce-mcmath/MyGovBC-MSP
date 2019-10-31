@@ -23,6 +23,22 @@ export class FakeDataEnrolment {
         };
     }
 
+    childInfo(): ChildInfoPageTest {
+        return {
+            firstName: faker.name.firstName(),
+            middleName: Math.random() > 0.5 ? faker.name.firstName() : undefined,
+            lastName: faker.name.lastName(),
+            birthDate: faker.date.between('1980-01-01', '1990-12-31'),
+            arrivalDateBC: faker.date.past(10),
+            schoolName: faker.company.companyName(),
+            street: faker.address.streetAddress(),
+            city: faker.address.city(),
+            postal: faker.address.zipCode('?#? #?#'),
+            departureDate: faker.date.between('1980-01-01', '1990-12-31'),
+            completionDate: faker.date.between('2020-01-01', '2030-12-31')
+        };
+    }
+
     getSeed() {
         return FakeDataEnrolment.seedVal;
     }
@@ -45,4 +61,18 @@ export interface PersonalInfoPageTest {
     lastName: string;
     birthDate: Date;
     arrivalDateBC: Date;
+}
+
+export interface ChildInfoPageTest {
+    firstName: string;
+    middleName?: string;
+    lastName: string;
+    birthDate: Date;
+    arrivalDateBC: Date;
+    schoolName: string;
+    street: string;
+    city: string;
+    postal: string;
+    departureDate: Date;
+    completionDate: Date;
 }

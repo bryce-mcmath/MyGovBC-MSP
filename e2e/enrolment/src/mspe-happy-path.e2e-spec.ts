@@ -15,6 +15,7 @@ describe('MSP Enrolment Page - End to End Test (Happy Path)', () => {
     const data = new FakeDataEnrolment;
     let personalInfoData;
     let contactData;
+    let childInfoData;
 
     // const ELIGIBILITY_PAGE_URL = `msp/enrolment/check-eligibility`;
     const PERSONAL_PAGE_URL = `msp/enrolment/personal-info`;
@@ -35,6 +36,7 @@ describe('MSP Enrolment Page - End to End Test (Happy Path)', () => {
         authorizePage = new AuthorizePage();
         personalInfoData = data.personalInfo();
         contactData = data.contactInfo();
+        childInfoData = data.childInfo();
         data.setSeed();
     });
 
@@ -79,14 +81,14 @@ describe('MSP Enrolment Page - End to End Test (Happy Path)', () => {
         expect(browser.getCurrentUrl()).toContain(CONFIRMATION_PAGE_URL, 'should be able to succesfully submit the form');
     }, 120000);
 
-    xit('03. should submit successfully if user has spouse and child', () => {
+    fit('03. should submit successfully if user has spouse and child', () => {
         eligibilityPage.fillPage();
         expect(browser.getCurrentUrl()).toContain(PERSONAL_PAGE_URL, 'should navigate to the Personal Info Page');
         personalPage.fillPage(personalInfoData);
         expect(browser.getCurrentUrl()).toContain(SPOUSE_PAGE_URL, 'should continue to the Spouse Info Page');
         spousePage.fillPage(personalInfoData);
         expect(browser.getCurrentUrl()).toContain(CHILD_PAGE_URL, 'should continue to the Child Info Page');
-        childPage.continue();
+        childPage.fillPage(childInfoData);
         expect(browser.getCurrentUrl()).toContain(CONTACT_PAGE_URL, 'should continue to the Contact Info Page');
         contactPage.fillPage(contactData);
         expect(browser.getCurrentUrl()).toContain(REVIEW_PAGE_URL, 'should continue to the Review Page');
