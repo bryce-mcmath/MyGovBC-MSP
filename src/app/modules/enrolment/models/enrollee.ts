@@ -7,17 +7,21 @@ import { SupportDocumentsDto, SupportDocuments } from '../../msp-core/models/sup
 import { AddressDto } from '../../../models/address.dto';
 
 export class Enrollee extends BasePerson implements ICanadianStatus {
+  // Flag to indicate gender to be displayed in personal-information component
+  readonly genderRequired: boolean = true;
 
   // Canadian status component - relationship is part of the base person
   status: StatusInCanada;
   currentActivity: CanadianStatusReason;
   clearData(x: any): void {
 
+    console.log( 'Clear data: ', x );
+
     // Clear documents already set when Canadian Status changes
     // fixes the error of value changes after initView
-    this.documents = new SupportDocuments();
-    this.hasNameChange = undefined;
-    this.nameChangeDocs = new SupportDocuments();
+    x.documents = new SupportDocuments();
+    x.hasNameChange = undefined;
+    x.nameChangeDocs = new SupportDocuments();
   }
 
   hasNameChange: boolean;

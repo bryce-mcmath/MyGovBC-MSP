@@ -2,7 +2,6 @@ import {ChangeDetectorRef, ElementRef, Component, EventEmitter, Input, OnInit, O
 import {debounceTime} from 'rxjs/operators';
 import {MspPerson} from '../../../../components/msp/model/msp-person.model';
 import {NgForm} from '@angular/forms';
-import {MspBirthDateComponent} from '../../../msp-core/components/birthdate/birthdate.component';
 import {BaseComponent} from '../../../../models/base.component';
 import {BenefitApplication} from '../../models/benefit-application.model';
 import {MspBenefitDataService} from '../../services/msp-benefit-data.service';
@@ -17,17 +16,11 @@ import { Relationship } from '../../../../models/relationship.enum';
 })
 export class PersonalDetailsRetroSuppbenComponent extends BaseComponent  {
 
-    lang = require('./i18n');
-    public dateLabel = 'BirthDate1';
     @Input() benefitApp: BenefitApplication;
 
     @Input() removeable: boolean = false;
     @Input() person: MspPerson;
-   // @ViewChild('name') name: MspFullNameComponent;
     @ViewChild('formRef') personalDetailsForm: NgForm;
-    @ViewChild('birthdate') birthdate: MspBirthDateComponent;
-//    @ViewChild('phn') phn: PhnComponent ;
-
     @Output() onChange = new EventEmitter<any>();
     @Output() docActionEvent = new EventEmitter<any>();
     @Output() notifySpouseRemoval: EventEmitter<MspPerson> = new EventEmitter<MspPerson>();
@@ -94,4 +87,17 @@ export class PersonalDetailsRetroSuppbenComponent extends BaseComponent  {
         this.onChange.emit(evt);
       }
 
+  get phnList() {
+    if ( this.person.relationship === Relationship.Spouse ) {
+      return [this.dataService.benefitApp.applicant.previous_phn];
+    }
+    return [this.dataService.benefitApp.spouse.previous_phn];
+  }
+
+  get sinList() {
+    if ( this.person.relationship === Relationship.Spouse ) {
+      return [this.dataService.benefitApp.applicant.sin];
+    }
+    return [this.dataService.benefitApp.spouse.sin];
+  }
 }

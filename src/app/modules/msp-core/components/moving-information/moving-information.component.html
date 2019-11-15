@@ -25,8 +25,8 @@
     </common-radio>
     <common-error-container 
       [displayError]="!canContinueProcess">
-      You have indicated that a recent move to B.C. is not permanent.  As a result, this person
-      is not eligible for enrolment in the Medical Services Plan.  Please contact
+      You have indicated that a recent move to B.C. is not permanent.  As a result, you are 
+      not eligible for enrolment in the Medical Services Plan.  Please contact
       <a href="{{links.HIBC}}" target="_blank">Health Insurance BC</a> for further 
       information.
     </common-error-container>
@@ -49,9 +49,9 @@
         <common-date name="arrivalDateToBC__{{objectId}}"
                      label="Arrival date in B.C."
                      [dateRangeStart]="startDateRange"
-                     [dateRangeEnd]="today"
+                     [dateRangeEnd]="yesterday"
                      [(ngModel)]="person.arrivalToBCDate"
-                     [errorMessages]="recentMoveBCErrorMsg"
+                     [errorMessage]="recentMoveBCErrorMsg"
                      required>
         </common-date>
     </div>
@@ -60,10 +60,10 @@
       <common-date name="arrivalDateToCanada__{{objectId}}"
                    label="Arrival date in Canada{{!arrivalDateRequired ? ' (optional)' : ''}}"
                    [dateRangeStart]="startDateRange"
-                   [dateRangeEnd]="today"
+                   [dateRangeEnd]="moveCanEndDateRange"
                    [(ngModel)]="person.arrivalToCanadaDate"
                    [required]="arrivalDateRequired"
-                   [errorMessages]="recentMoveCanadaErrorMsg">
+                   [errorMessage]="recentMoveCanadaErrorMsg">
       </common-date>
     </div>
 
@@ -122,12 +122,12 @@
        </div>
 
        <div class="form-group col-sm-6">
-        <common-date name="departureDate__{{objectId}}"
+        <common-date name="departureDate_{{objectId}}"
                      label="{{departureDateLabel}}"
                      [(ngModel)]="person.oopDepartureDate"
-                     [errorMessages]="oopDepartureErrorMsg"
-                     [dateRangeStart]="oopDepartureStartRange"
-                     [dateRangeEnd]="today"
+                     [errorMessage]="oopDepartureErrorMsg"
+                     [dateRangeStart]="twelveMonthsAgo"
+                     [dateRangeEnd]="oopDepartureEndRange"
                      required>
         </common-date>
       </div>
@@ -136,9 +136,9 @@
           <common-date name="returnDate_{{objectId}}"
                        label="{{returnDateLabel}}"
                        [(ngModel)]="person.oopReturnDate"
-                       [errorMessages]="oopReturnErrorMsg"
+                       [errorMessage]="oopReturnErrorMsg"
                        [dateRangeStart]="oopReturnStartRange"
-                       [dateRangeEnd]="today"
+                       [dateRangeEnd]="yesterday"
                        required>
           </common-date>
         </div>
@@ -155,9 +155,7 @@
     <div *ngIf="person.hasPreviousBCPhn" class="form-group col-sm-6 ml-4 border-left">
       <common-phn name="previousPhn_{{objectId}}"
                   label="{{isApplicant? 'Your' : 'Their'}} previous B.C. Personal Health Number (optional)"
-                  [(ngModel)]="person.previousBCPhn"
-                  commonValidatePhn
-                  [allowEmptyValue]="true">
+                  [(ngModel)]="person.previousBCPhn">
       </common-phn>
     </div>
     
@@ -174,7 +172,8 @@
         <common-date name="dischargeDate__{{objectId}}"
                      label="Discharge date"
                      [dateRangeStart]="startDateRange"
-                     [dateRangeEnd]="today"
+                     [dateRangeEnd]="yesterday"
+                     [errorMessage]="dischargeDateErrorMsg"
                      [(ngModel)]="person.dischargeDate"
                      required>
         </common-date>
@@ -201,9 +200,9 @@
     <common-date name="recentMoveToBC__{{objectId}}"
                  label="Most recent move to B.C."
                  [dateRangeStart]="startDateRange"
-                 [dateRangeEnd]="today"
+                 [dateRangeEnd]="yesterday"
                  [(ngModel)]="person.arrivalToBCDate"
-                 [errorMessages]="recentMoveBCErrorMsg"
+                 [errorMessage]="recentMoveBCErrorMsg"
                  required>
     </common-date>
   </div>

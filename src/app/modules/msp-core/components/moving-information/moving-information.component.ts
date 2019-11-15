@@ -2,7 +2,8 @@ import { Component, OnInit, forwardRef, EventEmitter, Input, Output } from '@ang
 import { Base, PROVINCE_LIST, BRITISH_COLUMBIA, COUNTRY_LIST, ErrorMessage, LabelReplacementTag } from 'moh-common-lib';
 import { ControlContainer, NgForm } from '@angular/forms';
 import { environment } from '../../../../../environments/environment';
-import { startOfToday, subMonths } from 'date-fns';
+import { startOfToday, subMonths, isAfter, subDays } from 'date-fns';
+import { isBefore } from 'date-fns/esm';
 
 
 export interface IMovingInfo {
@@ -71,25 +72,32 @@ export class MovingInformationComponent<T extends IMovingInfo> extends Base impl
 
   departureDateLabel = 'Departure date';
   returnDateLabel = 'Return date';
-  today: Date = startOfToday();
-  TwelveMonthsAgo: Date = subMonths( this.today, 12 );
+  yesterday = subDays( startOfToday() , 1);
+  twelveMonthsAgo: Date = subMonths( this.yesterday, 12 );
 
   oopDepartureErrorMsg: ErrorMessage = {
     invalidRange: LabelReplacementTag + ' must be within the last 12 months and prior to return date.'
   };
 
   oopReturnErrorMsg: ErrorMessage = {
-    invalidRange: LabelReplacementTag + ' must be within the last 12 months and prior to departure date.'
+    invalidRange: LabelReplacementTag + ' must be within the last 12 months and after to departure date.'
   };
 
   private _relationshipLabel = '{RelationshipLabel}';
   recentMoveBCErrorMsg: ErrorMessage = {
-    invalidRange: 'The ' + this._relationshipLabel + ' most recent move to BC cannot be before the ' + this._relationshipLabel + ' date of birth.'
-
+    invalidRange: 'The ' + this._relationshipLabel + ' most recent move to BC cannot be before the ' +
+      this._relationshipLabel + ' date of birth.',
+    noFutureDatesAllowed: 'Most recent move to BC date cannot be in the future.'
   };
   recentMoveCanadaErrorMsg: ErrorMessage = {
-    invalidRange: 'The ' + this._relationshipLabel + ' most recent move to Canada cannot be before the ' + this._relationshipLabel + ' date of birth.'
+    invalidRange: 'The ' + this._relationshipLabel + ' most recent move to Canada cannot be before the ' +
+      this._relationshipLabel + ' date of birth and cannot be after the move to B.C. date.',
+    noFutureDatesAllowed: 'Most recent move to Canada date cannot be in the future.'
+  };
 
+  dischargeDateErrorMsg: ErrorMessage = {
+    invalidRange:  LabelReplacementTag + ' cannot be before the ' + this._relationshipLabel + ' date of birth.',
+    noFutureDatesAllowed: LabelReplacementTag + ' cannot be in the future.'
   };
 
   constructor() {
@@ -113,7 +121,7 @@ export class MovingInformationComponent<T extends IMovingInfo> extends Base impl
     // Update messages to display correct relationship (appliant, spouse, child )
     this.recentMoveBCErrorMsg.invalidRange = this.recentMoveBCErrorMsg.invalidRange.replace( regExp, relationType );
     this.recentMoveCanadaErrorMsg.invalidRange = this.recentMoveCanadaErrorMsg.invalidRange.replace( regExp, relationType );
-
+    this.dischargeDateErrorMsg.invalidRange = this.dischargeDateErrorMsg.invalidRange.replace( regExp, relationType );
   }
 
   // Used in HTML - wrapper so when changes happen there is no impact to Automated tests for TEST Team
@@ -208,15 +216,35 @@ export class MovingInformationComponent<T extends IMovingInfo> extends Base impl
     return true;
   }
 
-  get oopDepartureStartRange() {
-    return this.person.oopReturnDate ? this.person.oopReturnDate : this.TwelveMonthsAgo;
+  get oopDepartureEndRange() {
+
+    // Return date has been entered
+    if ( this.person.oopReturnDate ) {
+      if ( isAfter( this.person.oopReturnDate, this.twelveMonthsAgo ) &&
+           isBefore( this.person.oopReturnDate, this.yesterday ) ) {
+        return this.person.oopReturnDate;
+      }
+    }
+    return this.yesterday;
   }
 
   get oopReturnStartRange() {
-    return this.person.oopDepartureDate ? this.person.oopDepartureDate : this.TwelveMonthsAgo;
+
+    // Departure Date date has been entered
+    if ( this.person.oopDepartureDate ) {
+      if ( isAfter( this.person.oopDepartureDate, this.twelveMonthsAgo ) &&
+            isBefore( this.person.oopDepartureDate, this.yesterday ) ) {
+        return this.person.oopDepartureDate;
+      }
+    }
+    return this.twelveMonthsAgo;
   }
 
   get startDateRange() {
     return this.person.dateOfBirth ? this.person.dateOfBirth : null;
+  }
+
+  get moveCanEndDateRange() {
+    return this.person.arrivalToBCDate ? this.person.arrivalToBCDate : this.yesterday;
   }
 }
