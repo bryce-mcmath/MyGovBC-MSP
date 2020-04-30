@@ -40,7 +40,6 @@ export class MspPerson implements ICanadianStatus {
     _currentActivity: CanadianStatusReason;
     //documents: PersonDocuments = new PersonDocuments();
     nameChangeDocs: SupportDocuments = new SupportDocuments();
-    nameChangeAdditionalDocs: SupportDocuments = new SupportDocuments();
     hasNameChange: boolean;
 
     assistYearDocs: CommonImage[] = [];

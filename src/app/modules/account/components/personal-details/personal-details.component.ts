@@ -155,6 +155,7 @@ export class AccountPersonalDetailsComponent extends BaseComponent {
         this.onChange.emit(evt);
     }
 
+
     toggleMailingSameAsResidentialAddress(evt: boolean) {
         //this.person.mailingSameAsResidentialAddress = evt;
         if (evt) {

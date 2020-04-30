@@ -91,18 +91,14 @@ export interface ICanadianStatus {
    * up in its parents `this.form`, and will auto-update `this.form.valid`
    */
   viewProviders: [
-    {
-      provide: ControlContainer,
-      useExisting: forwardRef(() => NgForm)
-    }
+    { provide: ControlContainer, useExisting: forwardRef(() => NgForm) }
   ]
 })
-
 export class CanadianStatusComponent<T extends ICanadianStatus> extends Base {
 
-  // List of statuses to be displayed, if not provided, the default uses statusReasonRules().
+  //List of statuses to be displayed, if not provided, the default uses statusReasonRules().
   @Input() statusReasonList: CanadianStatusReason[];
-  @Input() label: String = 'Immigration status in Canada';
+  @Input() label: String = 'Your immigration status in Canada';
 
   @Input() displayStatusInCanada: boolean = true;
   // List of statuses where the status reasons show not be shown
@@ -140,7 +136,7 @@ export class CanadianStatusComponent<T extends ICanadianStatus> extends Base {
 
   get displayStatusReasons() {
     let show = (this.statusInCanada !== undefined);
-    if (show && this.hideStatusReasons.length > 0) {
+    if ( show && this.hideStatusReasons.length > 0 ) {
       const tmp = this.hideStatusReasons.find( x => x === this.person.status );
       show = tmp === undefined ? true : false;
     }
@@ -151,7 +147,7 @@ export class CanadianStatusComponent<T extends ICanadianStatus> extends Base {
    * Display available activities for status
    */
   get _availableStatusReasons() {
-    if (this.reasonList) {
+    if ( this.reasonList ) {
       return this.reasonList.map(itm => {
         return {
           label: this._reasonOpts[itm],
@@ -165,7 +161,7 @@ export class CanadianStatusComponent<T extends ICanadianStatus> extends Base {
 
   get reasonList() {
       // Get the status reason list available for the selected status
-      if (!this.statusReasonList) {
+      if ( !this.statusReasonList ) {
         return statusReasonRules( this.person.relationship, this.person.status );
       }
       return this.statusReasonList;
@@ -178,7 +174,7 @@ export class CanadianStatusComponent<T extends ICanadianStatus> extends Base {
   set statusReason( reason: CanadianStatusReason ) {
     this.person.currentActivity = reason;
 
-    if (this.person.clearData) {
+    if ( this.person.clearData ) {
       // Clear data
       this.person.clearData( this.person );
     }

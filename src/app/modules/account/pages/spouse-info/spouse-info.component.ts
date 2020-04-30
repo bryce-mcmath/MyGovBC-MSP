@@ -1,4 +1,4 @@
-import { Component, ViewChild, AfterViewInit, OnInit, OnDestroy } from '@angular/core';
+import {Component, ViewChild, AfterViewInit, OnInit, OnDestroy } from '@angular/core';
 import { MspAccountApp, AccountChangeOptions } from '../../models/account.model';
 import { MspAccountMaintenanceDataService } from '../../services/msp-account-data.service';
 import { Subscription } from 'rxjs';
@@ -17,7 +17,6 @@ import { Relationship } from 'app/models/relationship.enum';
   templateUrl: './spouse-info.component.html',
   styleUrls: ['./spouse-info.component.scss']
 })
-
 export class SpouseInfoComponent extends AbstractForm implements OnInit, AfterViewInit, OnDestroy {
 
   accountApp: MspAccountApp;
@@ -58,18 +57,20 @@ export class SpouseInfoComponent extends AbstractForm implements OnInit, AfterVi
         ).subscribe(() => {
           this.dataService.saveMspAccountApp();
         })
-      ];
+        ];
     }
   }
 
-  addSpouse() {
+addSpouse() {
+
     this.addNewSpouse = true;
     this.accountApp.hasSpouseAdded = true;
     this.accountChangeOptions.dependentChange = true;
     this.showUpdateSpouse = false;
     this.showSpouse = false;
-  //this.dataService.saveMspAccountApp();
+  //  this.dataService.saveMspAccountApp();
     return this.addNewSpouse;
+
   }
 
   removeSpouse() {
@@ -78,22 +79,27 @@ export class SpouseInfoComponent extends AbstractForm implements OnInit, AfterVi
     this.accountChangeOptions.dependentChange = true;
     this.showUpdateSpouse = false;
     this.addNewSpouse = false;
+
     //this.dataService.saveMspAccountApp();
     return this.showSpouse;
+
   }
 
   updateSpouse() {
     this.showUpdateSpouse = true;
     this.accountApp.hasSpouseUpdated = true;
+
     this.showSpouse = false;
     this.addNewSpouse = false;
+
     //this.dataService.saveMspAccountApp();
     return this.showUpdateSpouse;
   }
 
   removedAddedSpouse() {
+
     this.addNewSpouse = false;
-    this.accountApp.hasSpouseAdded = false;
+    this.accountApp.hasSpouseAdded = false; 
     this.accountChangeOptions.dependentChange = false;
     this.dataService.accountApp.addedSpouse = new MspPerson(Relationship.Spouse);
 }
@@ -106,8 +112,9 @@ export class SpouseInfoComponent extends AbstractForm implements OnInit, AfterVi
   }
 
   removedUpdatedSpouse() {
+
     this.showUpdateSpouse = false;
-    this.accountApp.hasSpouseUpdated = false;
+    this.accountApp.hasSpouseUpdated = false; 
     this.dataService.accountApp.updatedSpouse = new MspPerson(Relationship.Spouse);
   }
 
